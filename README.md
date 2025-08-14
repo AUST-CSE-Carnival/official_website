@@ -138,10 +138,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For any queries regarding the website or the event:
 
-- **Event Website**: [Visit our official page]
-- **Email**: [Contact information]
-- **Social Media**: [Social media links]
+- **Event Website**: https://austcsecarnival.vercel.app
+- **Email**: austcsecarnival@gmail.com
+- **Social Media**: https://www.facebook.com/austcsecarnivalofficial
 
 ---
 
-*Built with ❤️ for AUST CSE Carnival 6.0*
+*Built with Boraq*
