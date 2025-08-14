@@ -1,0 +1,262 @@
+/* Header Styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(2, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(46, 192, 149, 0.1);
+  transition: all var(--transition-base);
+  transform: translateY(0);
+}
+
+.headerScrolled {
+  background: rgba(2, 26, 26, 0.98);
+  box-shadow: var(--shadow-lg);
+  border-bottom-color: rgba(46, 192, 149, 0.2);
+}
+
+.headerHidden {
+  transform: translateY(-100%);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-lg); /* Changed from var(--spacing-md) to var(--spacing-lg) for more vertical space */
+  position: relative;
+}
+
+/* Logo Section */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo {
+  height: 52px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-light);
+  line-height: 1;
+}
+
+.logoSubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-accent-bright);
+  line-height: 1;
+}
+
+/* Desktop Navigation */
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+}
+
+.navLink {
+  position: relative;
+  color: var(--color-text-gray);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  padding: var(--spacing-sm) 0;
+  transition: all var(--transition-base);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width var(--transition-base);
+}
+
+.navLink:hover,
+.navLinkActive {
+  color: var(--color-text-light);
+}
+
+.navLink:hover::after,
+.navLinkActive::after {
+  width: 100%;
+}
+
+/* CTA Section */
+.ctaSection {
+  display: flex;
+  align-items: center;
+}
+
+.ctaButton {
+  background: var(--color-accent-bright);
+  color: var(--color-text-light);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-base);
+  border: 2px solid transparent;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+/* Mobile Menu Toggle */
+.mobileMenuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  cursor: pointer;
+  padding: var(--spacing-lg); /* Increased padding for larger click area */
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+  min-width: 48px; /* Ensure minimum touch target size */
+  min-height: 48px; /* Ensure minimum touch target size */
+  align-items: center;
+  justify-content: center;
+  /* Add a subtle background to visualize the clickable area */
+  position: relative;
+}
+
+.mobileMenuToggle:hover {
+  background: var(--color-secondary-dark);
+}
+
+/* Ensure the hamburger icon itself is properly sized */
+.mobileMenuToggle svg {
+  width: 24px;
+  height: 24px;
+  pointer-events: none; /* Prevent the icon from interfering with clicks */
+}
+
+/* Mobile Menu */
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-primary-dark);
+  border-top: 1px solid var(--color-accent-dark);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobileMenuContent {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mobileNavLink {
+  color: var(--color-text-gray);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  border-left: 3px solid transparent;
+}
+
+.mobileNavLink:hover,
+.mobileNavLinkActive {
+  color: var(--color-text-light);
+  background: var(--color-secondary-dark);
+  border-left-color: var(--color-accent-bright);
+}
+
+.mobileCta {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-secondary-dark);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobileCtaButton {
+  display: block;
+  width: calc(100% - 2rem); /* Subtract padding to prevent overflow */
+  max-width: 300px; /* Add max-width for better control */
+  margin: 0 auto; /* Center the button */
+  text-align: center;
+  background: var(--color-accent-bright);
+  color: var(--color-text-light);
+  padding: var(--spacing-md) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  transition: all var(--transition-base);
+  box-sizing: border-box;
+}
+
+.mobileCtaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navMenu,
+  .ctaSection {
+    display: none;
+  }
+
+  .mobileMenuToggle {
+    display: flex; /* Changed to flex to enable proper centering */
+  }
+
+  .nav {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .logo {
+    height: 36px; /* Increased from 44px to 60px for better visibility on mobile */
+    width: auto; /* Let width adjust proportionally */
+  }
+
+  .logoTitle {
+    font-size: var(--font-size-base);
+  }
+
+  .logoSubtitle {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    display: none;
+  }
+}

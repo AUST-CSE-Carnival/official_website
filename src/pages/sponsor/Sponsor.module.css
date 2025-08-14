@@ -1,0 +1,794 @@
+/* Container and Main Layout */
+.container {
+  min-height: 100vh;
+  background: var(--color-primary-dark);
+}
+
+.main {
+  padding-top: 80px; /* Account for fixed header height */
+}
+
+/* Hero Section */
+.hero {
+  padding: var(--spacing-2xl) 0;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary-dark) 100%);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.btnSecondary {
+  background: var(--color-secondary-dark);
+  color: var(--color-accent-bright);
+  border-color: var(--color-accent-bright);
+  backdrop-filter: blur(10px);
+}
+
+.btnSecondary:hover {
+  background: var(--color-accent-bright);
+  color: var(--color-text-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--shadow-colored);
+}
+
+.btnPrimary,
+.btnSecondary,
+.btnOutline {
+  padding: 12px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  border: 2px solid transparent;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--spacing-2xl);
+  align-items: center;
+}
+
+.heroText {
+  color: var(--color-text-light);
+}
+
+.heroTitle {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  color: var(--color-accent-bright);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.2;
+}
+
+.heroDescription {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-gray);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+.heroLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-secondary-dark);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  border: 2px solid var(--color-accent-dark);
+}
+
+.heroLogo img {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+}
+
+/* Sponsor Page Main Container */
+.sponsor {
+  min-height: 100vh;
+  background: var(--color-primary-dark);
+  padding-top: 80px; /* Add padding to account for fixed header */
+}
+
+/* Title Sponsor Section */
+.titleSponsor {
+  padding: var(--spacing-2xl) 0;
+  background: var(--color-primary-dark);
+}
+
+.titleSponsorContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--spacing-2xl);
+  align-items: center;
+}
+
+.titleSponsorLogo {
+  background: var(--color-secondary-dark);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-accent-dark);
+}
+
+.titleSponsorLogo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.titleSponsorInfo {
+  color: var(--color-text-light);
+}
+
+.companyName {
+  font-size: var(--font-size-2xl);
+  color: var(--color-accent-bright);
+  margin-bottom: var(--spacing-lg);
+}
+
+.companyDescription {
+  color: var(--color-text-gray);
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+}
+
+/* FAQ Section */
+.faq {
+  padding: var(--spacing-2xl) 0;
+  background: var(--gradient-dark);
+}
+
+.faqHeader {
+  max-width: 800px;
+  margin: 0 auto var(--spacing-2xl);
+  text-align: center;
+  padding: 0 var(--spacing-xl);
+}
+
+.sectionSubtitle {
+  color: var(--color-text-gray);
+  font-size: var(--font-size-lg);
+}
+
+.faqList {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.faqItem {
+  border: 2px solid var(--color-accent-dark);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-secondary-dark);
+  transition: all var(--transition-base);
+}
+
+.faqItem:hover {
+  border-color: var(--color-accent-bright);
+  transform: translateY(-2px);
+}
+
+.faqQuestion {
+  width: 100%;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-base);
+}
+
+.faqIcon {
+  color: var(--color-accent-bright);
+  font-size: var(--font-size-xl);
+  transition: transform var(--transition-base);
+  margin-left: var(--spacing-lg);
+  flex-shrink: 0;
+}
+
+.expanded .faqIcon {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--color-text-gray);
+  padding: 0 var(--spacing-xl);
+  opacity: 0;
+}
+
+.expanded .faqQuestion {
+  color: var(--color-accent-bright);
+  background: var(--color-primary-dark);
+}
+
+.expanded .faqAnswer {
+  max-height: 500px;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  opacity: 1;
+}
+
+/* Contact CTA Section */
+.contactCta {
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  text-align: center;
+  background: var(--color-primary-dark);
+}
+
+.ctaTitle {
+  font-size: var(--font-size-3xl);
+  color: var(--color-accent-bright);
+  margin-bottom: var(--spacing-md);
+}
+
+.ctaText {
+  color: var(--color-text-gray);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--color-accent-bright);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-base);
+}
+
+.ctaButton:hover {
+  background: var(--color-accent-dark);
+  color: var(--color-text-light);
+  transform: translateY(-2px);
+}
+
+/* Sponsors Section */
+.sponsors {
+  padding: var(--spacing-2xl) 0;
+  background: var(--color-secondary-dark);
+  overflow: hidden;
+  position: relative;
+}
+
+.sponsors::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg,
+    var(--color-secondary-dark) 0%,
+    rgba(3, 98, 76, 0.1) 50%,
+    var(--color-secondary-dark) 100%);
+  pointer-events: none;
+}
+
+.sponsorsContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  position: relative;
+  z-index: 1;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-3xl);
+  color: var(--color-accent-bright);
+  font-weight: 700;
+  position: relative;
+  margin-bottom:  4rem;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--color-text-gray);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-2xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sponsorsTrack {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: var(--spacing-xl) 0;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.sponsorsTrack::before,
+.sponsorsTrack::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sponsorsTrack::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-secondary-dark), transparent);
+}
+
+.sponsorsTrack::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-secondary-dark), transparent);
+}
+
+.sponsorsInner {
+  display: flex;
+  gap: var(--spacing-xl);
+  animation: scroll 30s linear infinite;
+  width: fit-content;
+}
+
+.sponsorsInner.paused {
+  animation-play-state: paused;
+}
+
+.sponsorLogo {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-dark);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-accent-dark);
+  box-shadow: var(--shadow-accent);
+  transition: all var(--transition-base);
+  padding: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.sponsorLogo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(46, 192, 149, 0.2),
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.sponsorLogo:hover::before {
+  left: 100%;
+}
+
+.sponsorLogo:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: var(--color-accent-bright);
+  box-shadow: 0 12px 40px rgba(46, 192, 149, 0.3);
+}
+
+.sponsorLogo img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  filter: brightness(0.9) contrast(1.1);
+  transition: all var(--transition-base);
+  z-index: 1;
+  position: relative;
+}
+
+.sponsorLogo:hover img {
+  filter: brightness(1.1) contrast(1.2);
+  transform: scale(1.1);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-33.33% - var(--spacing-xl)));
+  }
+}
+
+/* Sponsorship CTA Section */
+.ItGraphicsPartnershipButton {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: var(--color-primary-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.ItGraphicsPartnershipButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(46, 192, 149, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Boraq Logo Styling - Responsive across all devices */
+.boraqLogo {
+  width: clamp(120px, 15vw, 200px);
+  height: auto;
+  max-height: 120px;
+  object-fit: contain;
+  margin: 0 auto var(--spacing-lg);
+  display: block;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  filter: brightness(0.95) contrast(1.05);
+  position: relative;
+  z-index: 1;
+}
+
+.boraqLogo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.1);
+}
+
+.CyberBanglaLogo {
+  width: clamp(160px, 20vw, 300px);
+  height: auto;
+  max-height: 160px;
+  object-fit: contain;
+  margin: 0 auto var(--spacing-lg);
+  display: block;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  filter: brightness(0.95) contrast(1.05);
+  position: relative;
+  z-index: 1;
+}
+
+.CyberBanglaLogo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.1);
+}
+
+.ctaHeading {
+  font-size: var(--font-size-2xl);
+  color: var(--color-accent-bright);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaDescription {
+  color: var(--color-text-gray);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-xl);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.partnershipButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--gradient-primary);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.partnershipButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.partnershipButton:hover::before {
+  left: 100%;
+}
+
+.partnershipButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(46, 192, 149, 0.4);
+}
+
+.partnershipButton:active {
+  transform: translateY(-1px);
+}
+
+/* Segment Partnership Section */
+.segmentPartnership {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.segmentPartnership::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.segmentPartnership .sectionTitle {
+  color: var(--color-accent-bright);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.segmentPartnership .ctaDescription {
+  color: var(--color-text-gray);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .heroContent,
+  .titleSponsorContent {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--spacing-xl);
+  }
+
+  .heroText {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .sponsorLogo {
+    width: 180px;
+    height: 120px;
+  }
+
+  .sponsorsTrack::before,
+  .sponsorsTrack::after {
+    width: 100px;
+  }
+
+  /* Boraq logo adjustments for tablets */
+  .boraqLogo {
+    width: clamp(100px, 12vw, 160px);
+    max-height: 100px;
+  }
+
+  .CyberBanglaLogo {
+    width: clamp(140px, 16vw, 200px);
+    max-height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: var(--font-size-3xl);
+  }
+
+  .sponsorLogo {
+    width: 160px;
+    height: 110px;
+    padding: var(--spacing-md);
+  }
+
+  .sponsorsInner {
+    gap: var(--spacing-lg);
+    animation-duration: 25s;
+  }
+
+  .faqQuestion {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-md);
+  }
+
+  .partnershipButton {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-base);
+  }
+
+  .ctaHeading {
+    font-size: var(--font-size-xl);
+  }
+
+  .ctaDescription {
+    font-size: var(--font-size-base);
+  }
+
+  .sponsorsTrack::before,
+  .sponsorsTrack::after {
+    width: 50px;
+  }
+
+  /* Boraq logo adjustments for mobile landscape */
+  .boraqLogo {
+    min-width: 150px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .CyberBanglaLogo {
+    min-width: 200px;
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .heroTitle {
+    font-size: var(--font-size-2xl);
+  }
+
+  .heroDescription {
+    font-size: var(--font-size-base);
+  }
+
+  .sponsorLogo {
+    width: 140px;
+    height: 100px;
+    padding: var(--spacing-sm);
+  }
+
+  .sponsorsInner {
+    gap: var(--spacing-md);
+    animation-duration: 20s;
+  }
+
+  .ItGraphicsPartnershipButton {
+    padding: var(--spacing-xl);
+    margin: 0 var(--spacing-md);
+  }
+
+  .partnershipButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .faqList {
+    padding: 0 var(--spacing-md);
+  }
+
+  .faqQuestion {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  /* Boraq logo adjustments for small mobile screens */
+  .boraqLogo {
+    width: clamp(80px, 8vw, 120px);
+    max-height: 80px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .CyberBanglaLogo {
+    width: clamp(120px, 12vw, 160px);
+    max-height: 120px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  /* Touch-friendly interactions for mobile */
+  .sponsorLogo:active {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .partnershipButton:active {
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .sponsorsInner {
+    animation: none;
+  }
+
+  .sponsorLogo,
+  .heroLogo,
+  .partnershipButton {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .sponsorLogo {
+    border-width: 3px;
+  }
+
+  .sponsorLogo img {
+    filter: contrast(1.5);
+  }
+}
+
+/* Print styles */
+@media print {
+  .sponsorsTrack {
+    overflow: visible;
+  }
+
+  .sponsorsInner {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .partnershipButton {
+    background: var(--color-accent-dark) !important;
+    color: white !important;
+  }
+}
