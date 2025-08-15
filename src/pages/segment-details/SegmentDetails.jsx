@@ -258,51 +258,142 @@ const SegmentDetails = () => {
 
                 {activeTab === 'registration' && (
                   <div className={styles.registrationContent}>
-                    <div className={styles.registrationGrid}>
-                      <div className={styles.registrationCard}>
-                        <h3>Registration Information</h3>
-                        <div className={styles.registrationDetails}>
-                          <div className={styles.regItem}>
-                            <FiCalendar className={styles.regIcon} />
-                            <div>
-                              <label>Registration Deadline</label>
-                              <span>{segment.registration?.deadline || 'TBA'}</span>
+                    {/* Special handling for E-Sports with multiple games */}
+                    {segment.isMultiGame ? (
+                      <div className={styles.multiGameRegistration}>
+                        <div className={styles.registrationCard}>
+                          <h3>Registration Information</h3>
+                          <div className={styles.registrationDetails}>
+                            <div className={styles.regItem}>
+                              <FiCalendar className={styles.regIcon} />
+                              <div>
+                                <label>Registration Deadline</label>
+                                <span>{segment.registration?.deadline || 'TBA'}</span>
+                              </div>
                             </div>
-                          </div>
-                          <div className={styles.regItem}>
-                            <FiDollarSign className={styles.regIcon} />
-                            <div>
-                              <label>Registration Fee</label>
-                              <span>{segment.registration?.fee || 'TBA'}</span>
+                            <div className={styles.regItem}>
+                              <FiDollarSign className={styles.regIcon} />
+                              <div>
+                                <label>Registration Fee</label>
+                                <span>{segment.registration?.fee || 'TBA'}</span>
+                              </div>
                             </div>
-                          </div>
-                          <div className={styles.regItem}>
-                            <FiUsers className={styles.regIcon} />
-                            <div>
-                              <label>Team Size</label>
-                              <span>{segment.registration?.teamSize || 'Individual'}</span>
+                            <div className={styles.regItem}>
+                              <FiUsers className={styles.regIcon} />
+                              <div>
+                                <label>Team Size</label>
+                                <span>{segment.registration?.teamSize || 'Varies by game'}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className={styles.actionCard}>
-                        <h3>Ready to Participate?</h3>
-                        <p>Register now to secure your spot in this exciting event!</p>
-                        <button className={styles.registerButton}>
-                          <FiExternalLink />
-                          <span>Register Now</span>
-                        </button>
-                        <p className={styles.registrationNote}>
-                          Registration opens soon. Stay tuned for updates!
-                        </p>
+                        <div className={styles.gamesSection}>
+                          <h3>Choose Your Game</h3>
+                          <p>Register for one or more gaming tournaments below:</p>
+                          <div className={styles.gamesGrid}>
+                            {segment.games?.map((game) => (
+                              <div key={game.id} className={styles.gameCard}>
+                                <div className={styles.gameInfo}>
+                                  <h4>{game.name}</h4>
+                                  <p>{game.description}</p>
+                                  <div className={styles.gameTeamSize}>
+                                    <FiUsers className={styles.gameIcon} />
+                                    <span>{game.teamSize}</span>
+                                  </div>
+                                </div>
+                                <a
+                                  href={game.registrationLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={styles.gameRegisterButton}
+                                >
+                                  <FiExternalLink />
+                                  <span>Register for {game.name}</span>
+                                </a>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      /* Standard registration for single-game events */
+                      <div className={styles.registrationGrid}>
+                        <div className={styles.registrationCard}>
+                          <h3>Registration Information</h3>
+                          <div className={styles.registrationDetails}>
+                            <div className={styles.regItem}>
+                              <FiCalendar className={styles.regIcon} />
+                              <div>
+                                <label>Registration Deadline</label>
+                                <span>{segment.registration?.deadline || 'TBA'}</span>
+                              </div>
+                            </div>
+                            <div className={styles.regItem}>
+                              <FiDollarSign className={styles.regIcon} />
+                              <div>
+                                <label>Registration Fee</label>
+                                <span>{segment.registration?.fee || 'TBA'}</span>
+                              </div>
+                            </div>
+                            <div className={styles.regItem}>
+                              <FiUsers className={styles.regIcon} />
+                              <div>
+                                <label>Team Size</label>
+                                <span>{segment.registration?.teamSize || 'Individual'}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className={styles.actionCard}>
+                          <h3>Ready to Participate?</h3>
+                          <p>Register now to secure your spot in this exciting event!</p>
+                          {segment.registrationLink ? (
+                            <a
+                              href={segment.registrationLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.registerButton}
+                            >
+                              <FiExternalLink />
+                              <span>Register Now</span>
+                            </a>
+                          ) : (
+                            <button className={styles.registerButton} disabled>
+                              <FiExternalLink />
+                              <span>Register Now</span>
+                            </button>
+                          )}
+                          <p className={styles.registrationNote}>
+                            {segment.registrationLink ?
+                              'Click to open registration form in a new tab.' :
+                              'Registration opens soon. Stay tuned for updates!'
+                            }
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
 
                 {activeTab === 'rules' && (
                   <div className={styles.rulesContent}>
+                    {/* Rulebook Button */}
+                    {segment.rulebookLink && (
+                      <div className={styles.rulebookHeader}>
+                        <a
+                          href={segment.rulebookLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.rulebookButton}
+                        >
+                          <FiExternalLink />
+                          <span>Rulebook & Resources</span>
+                        </a>
+                      </div>
+                    )}
+
                     <div className={styles.rulesCard}>
                       <h3>Rules & Guidelines</h3>
                       <div className={styles.rulesList}>

@@ -16,7 +16,9 @@ export const carnivalSegments = {
         deadline: 'August 18, 2025',
         fee: 'Free',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/ctf-bootcamp-01',
+      rulebookLink: 'https://drive.google.com/ctf-bootcamp-rules'
     },
     {
       id: 'workshop-capture-the-flag-02',
@@ -31,7 +33,9 @@ export const carnivalSegments = {
         deadline: 'August 18, 2025',
         fee: 'Free',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/ctf-bootcamp-02',
+      rulebookLink: 'https://drive.google.com/ctf-bootcamp-rules'
     },
     {
       id: 'workshop-capture-the-flag-03',
@@ -46,7 +50,9 @@ export const carnivalSegments = {
         deadline: 'August 18, 2025',
         fee: 'Free',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/ctf-bootcamp-03',
+      rulebookLink: 'https://drive.google.com/ctf-bootcamp-rules'
     },
     {
       id: 'workshop-hackathon',
@@ -61,7 +67,9 @@ export const carnivalSegments = {
         deadline: 'None',
         fee: 'None',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/hackathon-workshop',
+      rulebookLink: 'https://drive.google.com/hackathon-workshop-rules'
     }
   ],
 
@@ -79,7 +87,9 @@ export const carnivalSegments = {
         deadline: 'August 20, 2025',
         fee: 'Free',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/prelim-programming',
+      rulebookLink: 'https://drive.google.com/programming-contest-rules'
     }
   ],
 
@@ -97,7 +107,9 @@ export const carnivalSegments = {
         deadline: 'August 21, 2025',
         fee: 'TBA',
         teamSize: '1-3 members'
-      }
+      },
+      registrationLink: 'https://forms.google.com/uiux-competition',
+      rulebookLink: 'https://drive.google.com/uiux-competition-rules'
     },
     {
       id: 'math-olympiad',
@@ -112,7 +124,9 @@ export const carnivalSegments = {
         deadline: 'August 22, 2025',
         fee: 'TBA',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/math-olympiad',
+      rulebookLink: 'https://drive.google.com/math-olympiad-rules'
     },
     {
       id: 'capture-the-flag',
@@ -127,7 +141,9 @@ export const carnivalSegments = {
         deadline: 'August 23, 2025',
         fee: 'TBA',
         teamSize: '2-4 members'
-      }
+      },
+      registrationLink: 'https://forms.google.com/ctf-competition',
+      rulebookLink: 'https://drive.google.com/ctf-competition-rules'
     },
     {
       id: 'quiz-competition',
@@ -142,7 +158,9 @@ export const carnivalSegments = {
         deadline: 'August 24, 2025',
         fee: 'TBA',
         teamSize: '3-4 members'
-      }
+      },
+      registrationLink: 'https://forms.google.com/quiz-competition',
+      rulebookLink: 'https://drive.google.com/quiz-competition-rules'
     },
     {
       id: 'main-hackathon',
@@ -157,7 +175,9 @@ export const carnivalSegments = {
         deadline: 'August 25, 2025',
         fee: 'TBA',
         teamSize: '3-4 members'
-      }
+      },
+      registrationLink: 'https://forms.google.com/main-hackathon',
+      rulebookLink: 'https://drive.google.com/hackathon-rules'
     },
     {
       id: 'chess-competition',
@@ -172,7 +192,9 @@ export const carnivalSegments = {
         deadline: 'August 26, 2025',
         fee: 'TBA',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/chess-competition',
+      rulebookLink: 'https://drive.google.com/chess-competition-rules'
     },
     {
       id: 'esports-tournaments',
@@ -187,7 +209,40 @@ export const carnivalSegments = {
         deadline: 'August 26, 2025',
         fee: 'TBA',
         teamSize: 'Varies by game'
-      }
+      },
+      // Special structure for E-Sports with multiple games
+      isMultiGame: true,
+      games: [
+        {
+          id: 'valorant',
+          name: 'Valorant',
+          teamSize: '5 players',
+          registrationLink: 'https://forms.google.com/esports-valorant',
+          description: 'Tactical first-person shooter competition'
+        },
+        {
+          id: 'fifa',
+          name: 'FIFA 24',
+          teamSize: '1 player',
+          registrationLink: 'https://forms.google.com/esports-fifa',
+          description: 'Football simulation tournament'
+        },
+        {
+          id: 'pubg',
+          name: 'PUBG Mobile',
+          teamSize: '4 players',
+          registrationLink: 'https://forms.google.com/esports-pubg',
+          description: 'Battle royale championship'
+        },
+        {
+          id: 'lol',
+          name: 'League of Legends',
+          teamSize: '5 players',
+          registrationLink: 'https://forms.google.com/esports-lol',
+          description: 'MOBA tournament'
+        }
+      ],
+      rulebookLink: 'https://drive.google.com/esports-rules'
     },
     {
       id: 'main-programming-contest',
@@ -202,7 +257,9 @@ export const carnivalSegments = {
         deadline: 'August 27, 2025',
         fee: 'TBA',
         teamSize: 'Individual'
-      }
+      },
+      registrationLink: 'https://forms.google.com/main-programming',
+      rulebookLink: 'https://drive.google.com/programming-contest-rules'
     }
   ]
 };
