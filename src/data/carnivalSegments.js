@@ -50,37 +50,22 @@ export const carnivalSegments = {
     },
     {
       id: 'workshop-hackathon',
-      title: 'Hackathon Bootcamp',
+      title: 'Hackathon Workshop',
       type: 'Online',
-      date: 'August 18, 2025',
+      date: 'August 20, 2025',
       time: 'TBA',
       description: 'Build innovative solutions in this intensive preliminary hackathon.',
       category: 'Development',
       image: '/images/segments/27 Hackathon.jpg',
       registration: {
-        deadline: 'August 19, 2025',
-        fee: 'Free',
-        teamSize: '3-4 members'
+        deadline: 'None',
+        fee: 'None',
+        teamSize: 'Individual'
       }
     }
   ],
 
   prelims: [
-    {
-      id: 'prelim-hackathon',
-      title: 'Hackathon',
-      type: 'Onsite',
-      date: 'August 21, 2025',
-      time: 'TBA',
-      description: 'Build innovative solutions in this intensive preliminary hackathon.',
-      category: 'Development',
-      image: '/images/segments/27 Hackathon.jpg',
-      registration: {
-        deadline: 'August 19, 2025',
-        fee: 'Free',
-        teamSize: '3-4 members'
-      }
-    },
     {
       id: 'prelim-programming-contest',
       title: 'Programming Contest',
