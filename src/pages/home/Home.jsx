@@ -175,22 +175,22 @@ const Home = () => {
       <section className={styles.titleSponsor}>
         <div className={styles.container}>
           <h2 className={styles.sectionTitle}>
-            Our Title Sponsor Havit
+            Our Title Sponsor HAVIT
           </h2>
           <div className={styles.sponsorContent}>
             <div className={styles.sponsorLogo}>
               <img src={titleSponsor} alt="Habit Logo" />
             </div>
             <div className={styles.sponsorInfo}>
-              <h3>Havit Bangladesh</h3>
+              <h3>HAVIT Bangladesh</h3>
               <p>
                 Founded in 1998, HAVIT is a global consumer tech brand that integrates R&D, industrial design, large-scale production, and global omnichannel marketing. It encompasses audio devices, gaming gears, mobile accessories, and smart life electronic products.
                 <br/><br/>
-                Welcome to Havit Bangladesh. Our vision is Exploring innovative technology and providing smart, aesthetic and functional products to service users in Bangladesh. Applying innovative technology to empower everyone to become fun creators of a better life. Explore and Innovate; Strive and Undertake.
+                Welcome to HAVIT Bangladesh. Our vision is Exploring innovative technology and providing smart, aesthetic and functional products to service users in Bangladesh. Applying innovative technology to empower everyone to become fun creators of a better life. Explore and Innovate; Strive and Undertake.
               </p>
             <div style={{display: 'flex', gap: '1rem'}}>
-              <Link to="https://havit.com.bd/" className={styles.btnSecondary} >Havit BD</Link>
-              <Link to="https://havitsmart.com/" className={styles.btnSecondary}>Havit Smart</Link>
+              <Link to="https://havit.com.bd/" className={styles.btnSecondary} >HAVIT BD</Link>
+              <Link to="https://havitsmart.com/" className={styles.btnSecondary}>HAVIT Smart</Link>
             </div>
             </div>
           </div>
