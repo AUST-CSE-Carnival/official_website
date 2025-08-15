@@ -140,7 +140,7 @@ export const carnivalSegments = {
       registration: {
         deadline: 'August 23, 2025',
         fee: '299 BDT',
-        teamSize: '2-4 members'
+        teamSize: '2-3 members'
       },
       registrationLink: 'https://forms.gle/UYX89cssKMXbijLx5',
       rulebookLink: 'https://drive.google.com/ctf-competition-rules'
@@ -256,7 +256,7 @@ export const carnivalSegments = {
       registration: {
         deadline: 'August 27, 2025',
         fee: 'Free',
-        teamSize: 'Individual'
+        teamSize: '3 members'
       },
       registrationLink: 'https://forms.gle/6GjgUaScPvEw2h5b7',
       rulebookLink: 'https://drive.google.com/drive/folders/15Ip7_nHcd6LdrWgixiBkJWrZYDCf3ScH'
@@ -273,16 +273,35 @@ export const getAllSegments = () => {
   ];
 };
 
+// Get all segments sorted by date chronologically
+export const getAllSegmentsByDate = () => {
+  return getAllSegments().sort((a, b) => {
+    const dateA = new Date(a.date.split(' - ')[0]); // Handle date ranges
+    const dateB = new Date(b.date.split(' - ')[0]);
+    return dateA - dateB;
+  });
+};
+
 export const getSegmentById = (id) => {
   return getAllSegments().find(segment => segment.id === id);
 };
 
 export const getSegmentsByCategory = (category) => {
-  return getAllSegments().filter(segment => segment.category === category);
+  return getAllSegments().filter(segment => segment.category === category)
+    .sort((a, b) => {
+      const dateA = new Date(a.date.split(' - ')[0]);
+      const dateB = new Date(b.date.split(' - ')[0]);
+      return dateA - dateB;
+    });
 };
 
 export const getSegmentsByType = (type) => {
-  return getAllSegments().filter(segment => segment.type === type);
+  return getAllSegments().filter(segment => segment.type === type)
+    .sort((a, b) => {
+      const dateA = new Date(a.date.split(' - ')[0]);
+      const dateB = new Date(b.date.split(' - ')[0]);
+      return dateA - dateB;
+    });
 };
 
 export const getUpcomingSegments = () => {
