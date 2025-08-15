@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Event.module.css'; // Updated to use enhanced CSS
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import { carnivalSegments, getAllSegments } from '../../data/carnivalSegments';
+import { carnivalSegments, getAllSegments, getAllSegmentsByDate, getSegmentsByType } from '../../data/carnivalSegments';
 
 // Import all 8 hero images from event page hero image gallery
 import heroImg1 from '../../assets/images/event page hero image gallery/carnival_1_img_13.jpg';
@@ -80,6 +80,32 @@ function HeroSection() {
 function EventSchedule() {
   const [selectedTab, setSelectedTab] = useState('workshops');
 
+  // Get sorted segments by type
+  const getSortedSegmentsByType = (type) => {
+    switch(type) {
+      case 'workshops':
+        return carnivalSegments.workshops.sort((a, b) => {
+          const dateA = new Date(a.date.split(' - ')[0]);
+          const dateB = new Date(b.date.split(' - ')[0]);
+          return dateA - dateB;
+        });
+      case 'prelims':
+        return carnivalSegments.prelims.sort((a, b) => {
+          const dateA = new Date(a.date.split(' - ')[0]);
+          const dateB = new Date(b.date.split(' - ')[0]);
+          return dateA - dateB;
+        });
+      case 'main':
+        return carnivalSegments.mainSegments.sort((a, b) => {
+          const dateA = new Date(a.date.split(' - ')[0]);
+          const dateB = new Date(b.date.split(' - ')[0]);
+          return dateA - dateB;
+        });
+      default:
+        return [];
+    }
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString.split(' - ')[0]); // Handle date ranges
     return date.toLocaleDateString('en-US', {
@@ -133,7 +159,7 @@ function EventSchedule() {
             <h3 className={styles.scheduleTitle}>Workshops Roadmap</h3>
             <div className={styles.roadmapContainer}>
               <div className={styles.timelinePath}></div>
-              {carnivalSegments.workshops.map((event, index) => (
+              {getSortedSegmentsByType('workshops').map((event, index) => (
                 <div key={event.id} className={styles.roadmapEvent}>
                   <div className={styles.timelineNode}></div>
                   <Link to={`/segment/${event.id}`} className={styles.roadmapCard}>
@@ -166,7 +192,7 @@ function EventSchedule() {
             <h3 className={styles.scheduleTitle}>Preliminary Events Roadmap</h3>
             <div className={styles.roadmapContainer}>
               <div className={styles.timelinePath}></div>
-              {carnivalSegments.prelims.map((event, index) => (
+              {getSortedSegmentsByType('prelims').map((event, index) => (
                 <div key={event.id} className={styles.roadmapEvent}>
                   <div className={styles.timelineNode}></div>
                   <Link to={`/segment/${event.id}`} className={styles.roadmapCard}>
@@ -199,7 +225,7 @@ function EventSchedule() {
             <h3 className={styles.scheduleTitle}>Main Events Roadmap</h3>
             <div className={styles.roadmapContainer}>
               <div className={styles.timelinePath}></div>
-              {carnivalSegments.mainSegments.map((event, index) => (
+              {getSortedSegmentsByType('main').map((event, index) => (
                 <div key={event.id} className={styles.roadmapEvent}>
                   <div className={styles.timelineNode}></div>
                   <Link to={`/segment/${event.id}`} className={styles.roadmapCard}>
