@@ -236,7 +236,7 @@ const Gallery = () => {
                   <span className={styles.heroStatLabel}>Carnival Editions</span>
                 </div>
                 <div className={styles.heroStat}>
-                  <span className={styles.heroStatNumber}>12+</span>
+                  <span className={styles.heroStatNumber}>8+</span>
                   <span className={styles.heroStatLabel}>Total segments</span>
                 </div>
                 <div className={styles.heroStat}>
