@@ -108,13 +108,13 @@ function ItGraphicsPartnership() {
 function SegmentPartnership() {
   return (
     <section className={styles.segmentPartnership}>
-      <h2 className={styles.sectionTitle}>Segment Partnership</h2>
-        <img src={partner5} alt="Cyber Bangla" className={styles.CyberBanglaLogo} />
+      <h2 className={styles.sectionTitle}>Outfit Partner</h2>
+        <img src={partner7} alt="UKWAY Global" className={styles.CyberBanglaLogo} />
       <p className={styles.ctaDescription}>
-          The threat is very real and the danger of being attacked is imminent. Cyber Bangla has been created with the sole purpose of warding off these threats and safeguarding the clients' data from such attacks whilst ensuring confidentiality, integrity and the availability of that data remains intact.
+          UKWAY Global Education Consultants is an international student consulting firm for education, based in the UK. We work with students from different educational and cultural backgrounds. We operate in the UK, USA, Australia, Canada, Europe, and the Middle East.
       </p>
-      <Link to="https://cyberbangla.org/" className={styles.ctaButton}>
-        Cyber Bangla
+      <Link to="https://www.facebook.com/ukwayglobalec.bd" className={styles.ctaButton}>
+        Learn More
       </Link>
     </section>
   );
@@ -153,7 +153,7 @@ function PartnershipRow() {
           <h2 className={styles.sectionTitle}>Hackathon Partner</h2>
           <img src={partner4} alt="Hackathon Partner" className={styles.CyberBanglaLogo} />
           <p className={styles.ctaDescription}>
-              Programming Hero is working to build the learning-to-career journey of Bangladeshi youth in the tech sector. In the last 4 years, 5,000+ students have secured jobs or internships as web developers through Programming Hero’s Web Development Bootcamp.
+              Programming Hero is working to build the learning-to-career journey of Bangladeshi youth in the tech sector. In the last 4 years, 5,000+ students have secured jobs or internships as web developers through Programming Hero's Web Development Bootcamp.
           </p>
           <Link to="https://www.facebook.com/programmingHero" className={styles.ctaButton}>
             Learn More
@@ -161,13 +161,13 @@ function PartnershipRow() {
         </div>
 
         <div className={styles.partnershipItem}>
-          <h2 className={styles.sectionTitle}>Outfit Partner</h2>
-          <img src={partner7} alt="Outfit Partner" className={styles.CyberBanglaLogo} />
+          <h2 className={styles.sectionTitle}>CTF Partner</h2>
+          <img src={partner5} alt="Cyber Bangla" className={styles.CyberBanglaLogo} />
           <p className={styles.ctaDescription}>
-              UKWAY Global Education Consultants is an international student consulting firm for education, based in the UK. We work with students from different educational and cultural backgrounds. We operate in the UK, USA, Australia, Canada, Europe, and the Middle East.
+              The threat is very real and the danger of being attacked is imminent. Cyber Bangla has been created with the sole purpose of warding off these threats and safeguarding the clients' data from such attacks whilst ensuring confidentiality, integrity and the availability of that data remains intact.
           </p>
-          <Link to="https://www.facebook.com/ukwayglobalec.bd" className={styles.ctaButton}>
-              Learn More
+          <Link to="https://cyberbangla.org/" className={styles.ctaButton}>
+            Cyber Bangla
           </Link>
         </div>
       </div>
