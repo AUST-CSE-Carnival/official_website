@@ -1139,6 +1139,53 @@
   .magazineContent p {
     font-size: 1rem; /* Smaller description */
   }
+
+  .galleryHeader {
+    padding: 16px 20px !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .galleryTitle {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .galleryTitle h3 {
+    font-size: 1.3rem !important;
+  }
+
+  .imageContainer {
+    padding: 20px 15px !important; /* Much smaller padding for mobile */
+  }
+
+  .galleryImage {
+    max-width: 95% !important; /* Allow images to use more screen space */
+    max-height: 85% !important; /* Ensure images don't get too tall */
+  }
+
+  .navButton {
+    width: 45px !important;
+    height: 45px !important;
+    font-size: 1.8rem !important;
+  }
+
+  .prevButton {
+    left: 10px !important; /* Move closer to edge */
+  }
+
+  .nextButton {
+    right: 10px !important; /* Move closer to edge */
+  }
+
+  .thumbnailStrip {
+    padding: 15px !important;
+  }
+
+  .thumbnail {
+    width: 50px !important;
+    height: 50px !important;
+  }
 }
 
 @media (max-width: 480px) {
