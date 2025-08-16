@@ -240,7 +240,7 @@ const Gallery = () => {
             <span className={styles.yearText}>{carnival.year}</span>
           </div>
           <div className={styles.timelineDot} style={{ backgroundColor: carnival.accentColor }}>
-            <Icon type={carnival.icon} size="medium" />
+            <span className={styles.carnivalNumber}>{carnival.carnivalNumber}</span>
           </div>
           {index < Object.keys(carnivalData).length - 1 && (
             <div className={styles.timelineLine} style={{ backgroundColor: carnival.accentColor }}></div>
@@ -261,7 +261,7 @@ const Gallery = () => {
 
           <div className={styles.cardHeader}>
             <div className={styles.cardIcon}>
-              <Icon type={carnival.icon} size="large" />
+              <span className={styles.carnivalNumber}>{carnival.carnivalNumber}</span>
             </div>
             <div className={styles.cardYear}>{carnival.year}</div>
           </div>
@@ -333,7 +333,7 @@ const Gallery = () => {
           <div className={styles.galleryHeader}>
             <div className={styles.galleryInfo}>
               <div className={styles.galleryTitle}>
-                <span className={styles.carnivalIcon}>{currentCarnival.icon}</span>
+                <span className={styles.carnivalIcon}>{currentCarnival.carnivalNumber}</span>
                 <h3>{currentCarnival.title}</h3>
                 <span className={styles.galleryYear}>{currentCarnival.year}</span>
               </div>
