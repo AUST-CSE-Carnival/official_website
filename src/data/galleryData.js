@@ -69,7 +69,7 @@ export const carnivalData = {
     highlights: ["International Speakers", "VR/AR Demos", "Blockchain Workshop"]
   },
   "5.0": {
-    title: "Techpirates 47 ",
+    title: "Techpirates 47",
     subtitle: "The Future is Here",
     description: "Our most ambitious carnival yet, showcasing the latest in AI, machine learning, and emerging technologies.",
     year: "2025",

@@ -15,6 +15,7 @@ const Sponsor = lazy(() => import('./pages/sponsor/Sponsor'));
 const Contact = lazy(() => import('./pages/contact/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 const SegmentDetails = lazy(() => import('./pages/segment-details/SegmentDetails'));
+const ImageViewer = lazy(() => import('./pages/image-viewer/ImageViewer'));
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/event" element={<Event />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/gallery/:carnivalId" element={<ImageViewer />} />
               <Route path="/sponsor" element={<Sponsor />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/segment/:id" element={<SegmentDetails />} />

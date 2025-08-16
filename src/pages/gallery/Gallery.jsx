@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Icon from '../../components/common/Icon';
 import styles from './Gallery.module.css';
 import { carnivalData, magazineData } from '../../data/galleryData';
 
-// Remove the local carnival data and image import function as they're now in the data file
-
 const Gallery = () => {
-  const [activeGallery, setActiveGallery] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [imageLoadError, setImageLoadError] = useState(false);
+  const navigate = useNavigate();
   const [visibleSections, setVisibleSections] = useState(new Set(['hero'])); // Initialize with hero visible
 
   const roadmapRef = useRef(null);
@@ -110,116 +105,12 @@ const Gallery = () => {
     };
   }, []);
 
-  // Enhanced gallery opening with preloading
-  const openGallery = useCallback((carnivalVersion) => {
-    setIsLoading(true);
-    setImageLoadError(false);
-    setActiveGallery(carnivalVersion);
-    setCurrentImageIndex(0);
-    setIsGalleryOpen(true);
-    document.body.style.overflow = 'hidden';
-
-    // Preload first few images
-    const carnival = carnivalData[carnivalVersion];
-    if (carnival) {
-      carnival.images.slice(0, 3).forEach(img => {
-        const image = new Image();
-        image.src = img.src;
-      });
-    }
-
-    setTimeout(() => setIsLoading(false), 600);
-  }, []);
-
-  // Enhanced gallery closing
-  const closeGallery = useCallback(() => {
-    setIsGalleryOpen(false);
-    setActiveGallery(null);
-    setCurrentImageIndex(0);
-    document.body.style.overflow = 'unset';
-  }, []);
-
-  // Enhanced image navigation with preloading
-  const nextImage = useCallback(() => {
-    if (activeGallery && carnivalData[activeGallery]) {
-      const images = carnivalData[activeGallery].images;
-      const nextIndex = currentImageIndex < images.length - 1 ? currentImageIndex + 1 : 0;
-      setCurrentImageIndex(nextIndex);
-
-      // Preload next image
-      if (nextIndex + 1 < images.length) {
-        const image = new Image();
-        image.src = images[nextIndex + 1].src;
-      }
-    }
-  }, [activeGallery, currentImageIndex]);
-
-  const prevImage = useCallback(() => {
-    if (activeGallery && carnivalData[activeGallery]) {
-      const images = carnivalData[activeGallery].images;
-      const prevIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
-      setCurrentImageIndex(prevIndex);
-
-      // Preload previous image
-      if (prevIndex - 1 >= 0) {
-        const image = new Image();
-        image.src = images[prevIndex - 1].src;
-      }
-    }
-  }, [activeGallery, currentImageIndex]);
-
-  // Enhanced keyboard navigation
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (!isGalleryOpen) return;
-
-      switch (e.key) {
-        case 'Escape':
-          closeGallery();
-          break;
-        case 'ArrowLeft':
-          prevImage();
-          break;
-        case 'ArrowRight':
-          nextImage();
-          break;
-        case ' ':
-          e.preventDefault();
-          nextImage();
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isGalleryOpen, closeGallery, nextImage, prevImage]);
-
-  // Enhanced touch/swipe functionality
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-
-  const handleTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+  // Navigate to gallery page
+  const openGallery = (version) => {
+    // Encode the version to be URL-safe (replace dots with dashes)
+    const urlSafeVersion = version.replace(/\./g, '-');
+    navigate(`/gallery/${urlSafeVersion}`);
   };
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = useCallback(() => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) nextImage();
-    else if (isRightSwipe) prevImage();
-  }, [touchStart, touchEnd, nextImage, prevImage]);
-
 
   // Fixed Roadmap Section Component
   const RoadmapSection = ({ carnival, version, index }) => {
@@ -312,127 +203,6 @@ const Gallery = () => {
               </span>
               <div className={styles.buttonRipple}></div>
             </button>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // Enhanced Gallery Modal Component
-  const GalleryModal = () => {
-    if (!isGalleryOpen || !activeGallery) return null;
-
-    const currentCarnival = carnivalData[activeGallery];
-    const currentImage = currentCarnival.images[currentImageIndex];
-    const totalImages = currentCarnival.images.length;
-
-    return (
-      <div className={styles.galleryOverlay} onClick={closeGallery}>
-        <div className={styles.galleryModal} onClick={e => e.stopPropagation()}>
-          {/* Enhanced Gallery Header */}
-          <div className={styles.galleryHeader}>
-            <div className={styles.galleryInfo}>
-              <div className={styles.galleryTitle}>
-                <span className={styles.carnivalIcon}>{currentCarnival.carnivalNumber}</span>
-                <h3>{currentCarnival.title}</h3>
-                <span className={styles.galleryYear}>{currentCarnival.year}</span>
-              </div>
-              <div className={styles.galleryMeta}>
-                <span className={styles.imageCounter}>
-                  {currentImageIndex + 1} / {totalImages}
-                </span>
-                <div className={styles.progressBar}>
-                  <div
-                    className={styles.progressFill}
-                    style={{ width: `${((currentImageIndex + 1) / totalImages) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <button
-              className={styles.closeButton}
-              onClick={closeGallery}
-              aria-label="Close gallery"
-            >
-              <span>✕</span>
-            </button>
-          </div>
-
-          {/* Enhanced Gallery Content */}
-          <div
-            className={styles.galleryContent}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            {isLoading ? (
-              <div className={styles.galleryLoader}>
-                <div className={styles.loader}>
-                  <div className={styles.loaderRing}></div>
-                  <div className={styles.loaderRing}></div>
-                  <div className={styles.loaderRing}></div>
-                </div>
-                <p>Loading amazing memories...</p>
-              </div>
-            ) : (
-              <>
-                {/* Enhanced Navigation Arrows */}
-                <button
-                  className={`${styles.navButton} ${styles.prevButton}`}
-                  onClick={prevImage}
-                  aria-label="Previous image"
-                  disabled={currentImageIndex === 0}
-                >
-                  <span>‹</span>
-                </button>
-
-                {/* Enhanced Image Container */}
-                <div className={styles.imageContainer}>
-                  <img
-                    src={currentImage.src}
-                    alt={currentImage.alt}
-                    className={styles.galleryImage}
-                    loading="lazy"
-                    onError={() => setImageLoadError(true)}
-                    onLoad={() => setImageLoadError(false)}
-                  />
-                  {imageLoadError && (
-                    <div className={styles.imageError}>
-                      <Icon type="camera" size="large" />
-                      <p>Unable to load image</p>
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  className={`${styles.navButton} ${styles.nextButton}`}
-                  onClick={nextImage}
-                  aria-label="Next image"
-                  disabled={currentImageIndex === totalImages - 1}
-                >
-                  <span>›</span>
-                </button>
-              </>
-            )}
-          </div>
-
-          {/* Enhanced Thumbnail Strip */}
-          <div className={styles.thumbnailStrip}>
-            <div className={styles.thumbnailContainer}>
-              {currentCarnival.images.map((image, index) => (
-                <button
-                  key={image.id}
-                  className={`${styles.thumbnail} ${index === currentImageIndex ? styles.activeThumbnail : ''}`}
-                  onClick={() => setCurrentImageIndex(index)}
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  <img src={image.src} alt={`Thumbnail ${index + 1}`} />
-                  <div className={styles.thumbnailOverlay}>
-                    <span>{index + 1}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
           </div>
         </div>
       </div>
@@ -546,9 +316,6 @@ const Gallery = () => {
       </main>
 
       <Footer />
-
-      {/* Gallery Modal */}
-      <GalleryModal />
     </div>
   );
 };

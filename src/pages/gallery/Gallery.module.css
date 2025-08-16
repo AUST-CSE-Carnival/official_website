@@ -167,12 +167,12 @@
 .roadmapSection {
   display: flex;
   align-items: center;
-  margin-bottom: 140px; /* Increased spacing to prevent collision */
+  margin-bottom: 180px; /* Increased from 140px to prevent collision */
   position: relative;
   opacity: 0;
   transform: translateY(60px);
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  min-height: 400px; /* Ensure minimum height for proper spacing */
+  min-height: 450px; /* Increased from 400px for proper spacing */
 }
 
 .roadmapSection.visible {
@@ -191,24 +191,24 @@
 }
 
 .roadmapSection.left .carnivalCard {
-  margin-right: 80px; /* Increased margin to avoid timeline collision */
+  margin-right: 120px; /* Increased from 80px to avoid timeline collision */
 }
 
 .roadmapSection.right .carnivalCard {
-  margin-left: 80px; /* Increased margin to avoid timeline collision */
+  margin-left: 120px; /* Increased from 80px to avoid timeline collision */
 }
 
 /* Timeline Connector */
 .timelineConnector {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 5; /* Lower z-index to stay behind cards */
-  top: 50%;
-  transform: translate(-50%, -50%); /* Center vertically and horizontally */
+  z-index: 20; /* Increased from 15 to ensure it stays above everything */
+  pointer-events: none; /* Prevent interfering with card interactions */
 }
 
 .yearBadge {
@@ -218,54 +218,50 @@
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.9rem;
-  margin-bottom: 15px; /* Increased spacing */
+  margin-bottom: 20px; /* Increased from 15px for better spacing */
   box-shadow: 0 4px 15px rgba(46, 192, 149, 0.3);
   animation: float 3s ease-in-out infinite;
   white-space: nowrap;
+  z-index: 21; /* Ensure year badge is above everything */
+  position: relative;
+  pointer-events: auto; /* Re-enable pointer events for year badge */
 }
 
 .timelineDot {
-  width: 70px; /* Slightly larger */
-  height: 70px;
+  width: 80px; /* Increased from 70px for better visibility */
+  height: 80px;
   background: var(--color-accent-bright);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* Increased font size */
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: white; /* Changed to white for better visibility */
   border: 5px solid var(--color-primary-dark);
   box-shadow: 0 0 30px rgba(46, 192, 149, 0.6);
   animation: pulse 3s ease-in-out infinite;
   position: relative;
+  z-index: 21; /* Ensure timeline dot is above everything */
+  pointer-events: auto; /* Re-enable pointer events for timeline dot */
 }
 
 .carnivalNumber {
   font-weight: 700;
   font-size: inherit;
-  color: inherit;
-}
-
-.carnivalIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 12px;
-  background: rgba(46, 192, 149, 0.15);
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--color-accent-bright);
+  color: white; /* Explicitly set to white for better visibility */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Add subtle shadow for better readability */
 }
 
 .timelineLine {
-  width: 6px; /* Slightly thicker */
-  height: 140px; /* Longer to match increased spacing */
+  width: 6px;
+  height: 180px; /* Increased from 140px to match increased spacing */
   background: linear-gradient(to bottom, var(--color-accent-bright), var(--color-accent-dark));
-  margin-top: 15px;
+  margin-top: 20px; /* Increased from 15px */
   border-radius: 3px;
   box-shadow: 0 0 15px rgba(46, 192, 149, 0.4);
+  z-index: 19; /* Lower than timeline dot but higher than cards */
+  position: relative;
 }
 
 /* Enhanced Carnival Cards */
@@ -273,14 +269,16 @@
   position: relative;
   border-radius: 24px;
   padding: 40px;
-  min-width: 450px; /* Slightly smaller to provide more space */
-  max-width: 500px; /* Add max-width to prevent cards from being too wide */
+  min-width: 320px;
+  max-width: 480px; /* Reduced from 500px to give more space for timeline */
+  width: 100%;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: 2px solid var(--carnival-accent-color, rgba(46, 192, 149, 0.2));
   backdrop-filter: blur(10px);
   overflow: hidden;
-  z-index: 10; /* Higher z-index to stay above timeline */
+  z-index: 10; /* Lower z-index to stay below timeline */
+  box-sizing: border-box;
 }
 
 .carnivalCard::before {
@@ -675,6 +673,17 @@
   align-items: center;
   justify-content: center;
   padding: 40px 140px;
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .galleryImage {
@@ -683,16 +692,22 @@
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth opacity and transform transitions */
 }
 
-.imageError {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  color: var(--color-text-gray);
-  font-size: 3rem;
+.imageTransition {
+  /* Remove the animation that was causing reloads */
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Add a subtle fade effect for image changes */
+.galleryImage:not([src]) {
+  opacity: 0;
+}
+
+.galleryImage[src] {
+  opacity: 1;
 }
 
 /* Enhanced Thumbnail Strip */
@@ -870,7 +885,7 @@
 
 .magazineGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reduced from 350px */
   gap: 50px;
   max-width: 1100px;
   margin: 0 auto;
@@ -884,6 +899,9 @@
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
+  width: 100%; /* Add responsive width */
+  max-width: 100%; /* Ensure it doesn't exceed container */
+  box-sizing: border-box; /* Include padding/border in width */
   /* Remove link styling */
   text-decoration: none;
   color: inherit;
@@ -1024,9 +1042,17 @@
 
   .roadmapSection.left .carnivalCard,
   .roadmapSection.right .carnivalCard {
-    margin: 0;
-    min-width: 320px;
-    max-width: 400px;
+    margin: 0 !important;
+    min-width: 280px !important; /* Force override with !important */
+    max-width: 350px !important;
+    width: 90vw !important; /* Force responsive width */
+  }
+
+  .carnivalCard {
+    min-width: 280px !important; /* Direct override */
+    max-width: 350px !important;
+    width: 90vw !important;
+    padding: 30px 20px !important; /* Force reduced padding */
   }
 
   .timelineConnector {
@@ -1038,8 +1064,39 @@
     margin-top: 0;
   }
 
+  .timelineDot {
+    width: 60px; /* Slightly smaller for mobile */
+    height: 60px;
+    font-size: 1rem; /* Smaller font for mobile */
+  }
+
   .timelineLine {
     display: none; /* Hide connecting lines on mobile */
+  }
+
+  .cardIcon {
+    font-size: 1.5rem !important; /* Force smaller font size for mobile */
+    padding: 10px !important;
+    min-width: 45px !important;
+    min-height: 45px !important;
+  }
+
+  .carnivalNumber {
+    font-size: 1.2rem !important; /* Force visible carnival numbers */
+    font-weight: 800 !important; /* Bolder for better visibility */
+    color: var(--color-text-light) !important; /* Ensure good contrast */
+  }
+
+  .carnivalTitle {
+    font-size: 1.8rem; /* Smaller title for mobile */
+  }
+
+  .carnivalSubtitle {
+    font-size: 1rem;
+  }
+
+  .carnivalDescription {
+    font-size: 0.9rem;
   }
 
   .carnivalStats {
@@ -1064,6 +1121,84 @@
     font-size: 0.7rem;
     padding: 3px 8px;
   }
+
+  .viewGalleryButton {
+    padding: 14px 28px; /* Smaller button for mobile */
+    font-size: 0.9rem;
+  }
+
+  /* Magazine cards mobile responsiveness */
+  .magazineGrid {
+    grid-template-columns: 1fr !important; /* Force single column on tablets */
+    gap: 30px !important; /* Reduce gap */
+    padding: 0 20px; /* Add padding to grid container */
+  }
+
+  .magazineCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+  .magazineCover {
+    height: 350px; /* Reduce height for mobile */
+    padding: 30px; /* Reduce padding */
+  }
+
+  .magazineContent h3 {
+    font-size: 1.6rem; /* Smaller title for mobile */
+  }
+
+  .magazineContent p {
+    font-size: 1rem; /* Smaller description */
+  }
+
+  .galleryHeader {
+    padding: 16px 20px !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .galleryTitle {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .galleryTitle h3 {
+    font-size: 1.3rem !important;
+  }
+
+  .imageContainer {
+    padding: 20px 15px !important; /* Much smaller padding for mobile */
+  }
+
+  .galleryImage {
+    max-width: 95% !important; /* Allow images to use more screen space */
+    max-height: 85% !important; /* Ensure images don't get too tall */
+  }
+
+  .navButton {
+    width: 45px !important;
+    height: 45px !important;
+    font-size: 1.8rem !important;
+  }
+
+  .prevButton {
+    left: 10px !important; /* Move closer to edge */
+  }
+
+  .nextButton {
+    right: 10px !important; /* Move closer to edge */
+  }
+
+  .thumbnailStrip {
+    padding: 15px !important;
+  }
+
+  .thumbnail {
+    width: 50px !important;
+    height: 50px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1074,6 +1209,66 @@
 
   .pageTitle {
     font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 15px; /* Reduced container padding */
+  }
+
+  .roadmapSection.left .carnivalCard,
+  .roadmapSection.right .carnivalCard {
+    min-width: 260px !important; /* Force even smaller for very small screens */
+    max-width: 320px !important;
+    width: 95vw !important; /* Use more of the viewport width */
+  }
+
+  .carnivalCard {
+    min-width: 260px !important; /* Direct override for small screens */
+    max-width: 320px !important;
+    width: 95vw !important;
+    padding: 25px 15px !important; /* Force even more reduced padding */
+  }
+
+  .cardIcon {
+    font-size: 1.3rem !important;
+    padding: 8px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+
+  .carnivalNumber {
+    font-size: 1.1rem !important; /* Force adjusted for very small screens */
+    font-weight: 800 !important;
+    color: var(--color-text-light) !important;
+  }
+
+  .timelineDot {
+    width: 50px; /* Smaller timeline dot */
+    height: 50px;
+    font-size: 0.9rem;
+  }
+
+  .carnivalTitle {
+    font-size: 1.6rem;
+  }
+
+  .carnivalSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .carnivalDescription {
+    font-size: 0.85rem;
+  }
+
+  .carnivalStats {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for very small screens */
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .viewGalleryButton {
+    padding: 12px 24px;
+    font-size: 0.85rem;
   }
 
   .galleryHeader {
