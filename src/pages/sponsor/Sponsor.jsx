@@ -13,15 +13,19 @@ import partner3 from '../../assets/images/partners/partner_3.png';
 import partner4 from '../../assets/images/partners/partner_4.png';
 import partner5 from '../../assets/images/partners/partner_5.png';
 import partner6 from '../../assets/images/partners/partner_6.png';
+import partner7 from '../../assets/images/partners/partner_7.png';
+import partner8 from '../../assets/images/partners/partner_8.png';
 import boraq from '../../assets/images/boraq.png';
 
 const partners = [
-  { id: 1, name: 'Partner 1', logo: partner1 },
-  { id: 2, name: 'Partner 2', logo: partner2 },
-  { id: 3, name: 'Partner 3', logo: partner3 },
-  { id: 4, name: 'Partner 4', logo: partner4 },
-  { id: 5, name: 'Partner 5', logo: partner5 },
-  { id: 6, name: 'Partner 6', logo: partner6 },
+    { id: 1, name: 'Partner 1', logo: partner1 },
+    { id: 2, name: 'Partner 2', logo: partner2 },
+    { id: 3, name: 'Partner 3', logo: partner3 },
+    { id: 4, name: 'Partner 4', logo: partner4 },
+    { id: 5, name: 'Partner 5', logo: partner5 },
+    { id: 6, name: 'Partner 6', logo: partner6 },
+    { id: 7, name: 'Partner 7', logo: partner7 },
+    { id: 8, name: 'Partner 8', logo: partner8 },
 ];
 
 function HeroSection() {
@@ -141,7 +145,35 @@ function TitleSponsorSection() {
   );
 }
 
+function PartnershipRow() {
+  return (
+    <section className={styles.partnershipRow}>
+      <div className={styles.partnershipContainer}>
+        <div className={styles.partnershipItem}>
+          <h2 className={styles.sectionTitle}>Hackathon Partner</h2>
+          <img src={partner4} alt="Hackathon Partner" className={styles.CyberBanglaLogo} />
+          <p className={styles.ctaDescription}>
+              Programming Hero is working to build the learning-to-career journey of Bangladeshi youth in the tech sector. In the last 4 years, 5,000+ students have secured jobs or internships as web developers through Programming Hero’s Web Development Bootcamp.
+          </p>
+          <Link to="https://www.facebook.com/programmingHero" className={styles.ctaButton}>
+            Learn More
+          </Link>
+        </div>
 
+        <div className={styles.partnershipItem}>
+          <h2 className={styles.sectionTitle}>Outfit Partner</h2>
+          <img src={partner7} alt="Outfit Partner" className={styles.CyberBanglaLogo} />
+          <p className={styles.ctaDescription}>
+              UKWAY Global Education Consultants is an international student consulting firm for education, based in the UK. We work with students from different educational and cultural backgrounds. We operate in the UK, USA, Australia, Canada, Europe, and the Middle East.
+          </p>
+          <Link to="https://www.facebook.com/ukwayglobalec.bd" className={styles.ctaButton}>
+              Learn More
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function ContactCTA() {
   return (
@@ -167,6 +199,7 @@ export default function Sponsor() {
         <TitleSponsorSection />
           <ItGraphicsPartnership />
         <SegmentPartnership />
+        <PartnershipRow />
       </main>
       <Footer />
     </div>

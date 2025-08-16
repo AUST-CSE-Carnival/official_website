@@ -596,7 +596,66 @@
   z-index: 1;
 }
 
+/* Partnership Row Section */
+.partnershipRow {
+  padding: var(--spacing-2xl) 0;
+  background: var(--color-primary-dark);
+}
 
+.partnershipContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+  align-items: stretch;
+}
+
+.partnershipItem {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: var(--color-secondary-dark);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-accent-dark);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.partnershipItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(46, 192, 149, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.partnershipItem:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-accent-bright);
+  box-shadow: 0 8px 25px rgba(46, 192, 149, 0.2);
+}
+
+.partnershipItem .sectionTitle {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.partnershipItem .ctaDescription {
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--spacing-lg);
+}
+
+.partnershipItem .ctaButton {
+  position: relative;
+  z-index: 1;
+}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -673,15 +732,35 @@
     width: 50px;
   }
 
-  /* Boraq logo adjustments for mobile landscape */
-  .boraqLogo {
-    min-width: 150px;
+  /* Responsive adjustments for partnership row */
+  .partnershipContainer {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .partnershipItem {
+    padding: var(--spacing-lg);
+  }
+
+  .partnershipItem .sectionTitle {
+    font-size: var(--font-size-2xl);
+  }
+
+  .partnershipItem .ctaDescription {
+    font-size: var(--font-size-base);
     margin-bottom: var(--spacing-md);
   }
 
-  .CyberBanglaLogo {
-    min-width: 200px;
-    margin-bottom: var(--spacing-md);
+  .partnershipItem .ctaButton {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -726,6 +805,40 @@
   .faqQuestion {
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: var(--font-size-sm);
+  }
+
+  /* Responsive adjustments for partnership row */
+  .partnershipContainer {
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+
+  .partnershipItem {
+    padding: var(--spacing-md);
+  }
+
+  .partnershipItem .sectionTitle {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .partnershipItem .ctaDescription {
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .partnershipItem .ctaButton {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    width: 100%;
+    text-align: center;
+  }
+
+  .partnershipItem .CyberBanglaLogo {
+    width: clamp(100px, 25vw, 150px);
+    max-height: 100px;
+    margin-bottom: var(--spacing-sm);
   }
 
   /* Boraq logo adjustments for small mobile screens */
