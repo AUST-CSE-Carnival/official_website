@@ -179,7 +179,7 @@ const Footer = () => {
             <div className={styles.eventInfo}>
               <div className={styles.eventItem}>
                 <span className={styles.eventLabel}>Date:</span>
-                <span className={styles.eventValue}>21-28 August</span>
+                <span className={styles.eventValue}>21-29 August</span>
               </div>
               <div className={styles.eventItem}>
                 <span className={styles.eventLabel}>Venue:</span>
