@@ -1,0 +1,863 @@
+/* Enhanced Image Viewer Page Styles */
+.imageViewerPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary-dark) 50%, var(--color-accent-dark) 100%);
+  color: var(--color-text-light);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.imageViewerPage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(46, 192, 149, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(3, 98, 76, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(46, 192, 149, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.imageViewerPage.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: var(--color-primary-dark);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.fullscreen .main {
+  padding-top: 0;
+}
+
+/* Enhanced Viewer Header */
+.viewerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  background: rgba(4, 34, 34, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(46, 192, 149, 0.2);
+  position: sticky;
+  top: 80px;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.fullscreen .viewerHeader {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(2, 26, 26, 0.98);
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(46, 192, 149, 0.2) 0%, rgba(3, 98, 76, 0.2) 100%);
+  border: 2px solid var(--color-accent-bright);
+  color: var(--color-text-light);
+  padding: 14px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.backButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.backButton:hover::before {
+  left: 100%;
+}
+
+.backButton:hover {
+  background: var(--color-accent-bright);
+  color: var(--color-primary-dark);
+  transform: translateX(-8px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(46, 192, 149, 0.4);
+}
+
+.headerCenter {
+  flex: 2;
+  text-align: center;
+  position: relative;
+}
+
+.carnivalInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 12px;
+  animation: slideInFromTop 0.8s ease-out;
+}
+
+.carnivalIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--color-accent-bright) 0%, var(--color-accent-dark) 100%);
+  color: var(--color-primary-dark);
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 15px rgba(46, 192, 149, 0.4);
+  position: relative;
+}
+
+.carnivalIcon::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--color-accent-bright), var(--color-accent-dark));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carnivalIcon:hover::after {
+  opacity: 1;
+}
+
+.carnivalTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-text-light);
+  margin: 0;
+  background: linear-gradient(135deg, var(--color-text-light) 0%, var(--color-accent-bright) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.carnivalYear {
+  background: linear-gradient(135deg, rgba(46, 192, 149, 0.3) 0%, rgba(3, 98, 76, 0.3) 100%);
+  color: var(--color-accent-bright);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 1px solid rgba(46, 192, 149, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.imageCounter {
+  font-size: 1.3rem;
+  color: var(--color-accent-bright);
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  animation: slideInFromTop 0.8s ease-out 0.2s both;
+}
+
+.headerRight {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.fullscreenButton {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-text-light);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.fullscreenButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  transform: translate(-50%, -50%);
+}
+
+.fullscreenButton:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.fullscreenButton:hover {
+  background: var(--color-text-light);
+  color: var(--color-primary-dark);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Main Image Container */
+.imageContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 40px;
+  min-height: 65vh;
+}
+
+.fullscreen .imageContainer {
+  padding-top: 120px;
+  min-height: calc(100vh - 240px);
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, rgba(46, 192, 149, 0.2) 0%, rgba(3, 98, 76, 0.3) 100%);
+  border: 2px solid var(--color-accent-bright);
+  color: var(--color-text-light);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 10;
+  backdrop-filter: blur(20px);
+  font-size: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
+}
+
+.navButton::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--color-accent-bright), var(--color-accent-dark), var(--color-accent-bright));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navButton:hover::before {
+  opacity: 1;
+}
+
+.navButton:hover {
+  background: var(--color-accent-bright);
+  color: var(--color-primary-dark);
+  transform: translateY(-50%) scale(1.2);
+  box-shadow: 0 15px 40px rgba(46, 192, 149, 0.5);
+  opacity: 1;
+}
+
+.prevButton {
+  left: 50px;
+  animation: slideInFromLeft 0.8s ease-out 0.5s both;
+}
+
+.nextButton {
+  right: 50px;
+  animation: slideInFromRight 0.8s ease-out 0.5s both;
+}
+
+.imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  max-height: 80vh;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 100px rgba(0, 0, 0, 0.7);
+}
+
+.fullscreen .imageWrapper {
+  max-height: calc(100vh - 240px);
+  max-width: 95vw;
+}
+
+.mainImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: imageAppear 0.8s ease-out;
+  filter: brightness(1.02) contrast(1.05) saturate(1.1);
+}
+
+.mainImage:hover {
+  transform: scale(1.02);
+  filter: brightness(1.05) contrast(1.08) saturate(1.15);
+}
+
+.imageError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  color: var(--color-text-gray);
+  font-size: 1.3rem;
+  text-align: center;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Thumbnail Strip */
+.thumbnailStrip {
+  background: linear-gradient(135deg, rgba(4, 34, 34, 0.95) 0%, rgba(2, 26, 26, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(46, 192, 149, 0.3);
+  padding: 40px 30px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-bright) transparent;
+  position: relative;
+}
+
+.thumbnailStrip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-bright), transparent);
+}
+
+.thumbnailContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  min-width: max-content;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.thumbnail {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  background: var(--color-primary-dark);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  animation: thumbnailSlideIn 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.thumbnail:nth-child(1) { animation-delay: 0.1s; }
+.thumbnail:nth-child(2) { animation-delay: 0.15s; }
+.thumbnail:nth-child(3) { animation-delay: 0.2s; }
+.thumbnail:nth-child(4) { animation-delay: 0.25s; }
+.thumbnail:nth-child(5) { animation-delay: 0.3s; }
+
+.thumbnail::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 18px;
+  background: linear-gradient(45deg, var(--color-accent-bright), var(--color-accent-dark));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.thumbnail:hover {
+  border-color: var(--color-accent-bright);
+  transform: scale(1.15) translateY(-8px);
+  box-shadow: 0 20px 40px rgba(46, 192, 149, 0.3);
+}
+
+.thumbnail:hover::before {
+  opacity: 1;
+}
+
+.thumbnail:hover img {
+  transform: scale(1.1);
+  filter: brightness(1.1) contrast(1.2);
+}
+
+.activeThumbnail {
+  border-color: var(--color-accent-bright) !important;
+  box-shadow: 0 0 30px rgba(46, 192, 149, 0.8) !important;
+  transform: scale(1.1) translateY(-4px);
+}
+
+.activeThumbnail::before {
+  opacity: 1 !important;
+}
+
+.thumbnailOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(2, 26, 26, 0.9) 0%, rgba(4, 34, 34, 0.9) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+  font-size: 1rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.thumbnail:hover .thumbnailOverlay {
+  opacity: 1;
+}
+
+/* Enhanced Progress Bar */
+.progressBar {
+  height: 6px;
+  background: rgba(3, 98, 76, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.progressBar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(46, 192, 149, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-bright) 0%, var(--color-accent-dark) 50%, var(--color-accent-bright) 100%);
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 0 15px rgba(46, 192, 149, 0.8);
+  position: relative;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+  animation: progressGlow 1.5s ease-in-out infinite;
+}
+
+/* Enhanced Keyboard Shortcuts Info */
+.shortcutsInfo {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(2, 26, 26, 0.95) 0%, rgba(4, 34, 34, 0.95) 100%);
+  color: var(--color-text-gray);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(46, 192, 149, 0.3);
+  z-index: 100;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease-out 1s both;
+}
+
+.shortcutsInfo:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.fullscreen .shortcutsInfo {
+  bottom: 50px;
+}
+
+/* Enhanced Animations */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px) translateY(-50%);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateX(0) translateY(-50%);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px) translateY(-50%);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateX(0) translateY(-50%);
+  }
+}
+
+@keyframes imageAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes thumbnailSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes progressGlow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .imageContainer {
+    padding: 40px 20px;
+  }
+
+  .navButton {
+    width: 70px;
+    height: 70px;
+    font-size: 1.6rem;
+  }
+
+  .prevButton {
+    left: 30px;
+  }
+
+  .nextButton {
+    right: 30px;
+  }
+
+  .thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+
+  .carnivalTitle {
+    font-size: 1.8rem;
+  }
+
+  .imageWrapper {
+    max-height: 75vh; /* Increased from 80vh for better mobile viewing */
+  }
+}
+
+@media (max-width: 768px) {
+  .viewerHeader {
+    padding: 20px 24px;
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(2, 26, 26, 0.98);
+  }
+
+  .headerLeft,
+  .headerCenter,
+  .headerRight {
+    flex: none;
+    width: 100%;
+  }
+
+  .carnivalInfo {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .carnivalTitle {
+    font-size: 1.6rem;
+  }
+
+  .imageCounter {
+    font-size: 1.1rem;
+  }
+
+  .imageContainer {
+    padding: 20px 10px; /* Reduced horizontal padding for more image space */
+    min-height: 65vh; /* Increased minimum height for mobile */
+  }
+
+  .imageWrapper {
+    max-height: 85vh; /* Much larger for mobile */
+    max-width: 98vw; /* Use almost full screen width */
+  }
+
+  .mainImage {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px; /* Slightly smaller border radius for mobile */
+  }
+
+  .navButton {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+  }
+
+  .prevButton {
+    left: 5px; /* Move closer to edge for more image space */
+  }
+
+  .nextButton {
+    right: 5px; /* Move closer to edge for more image space */
+  }
+
+  .thumbnailStrip {
+    padding: 30px 20px;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+
+  .shortcutsInfo {
+    font-size: 0.8rem;
+    padding: 10px 20px;
+    bottom: 20px;
+  }
+
+  .backButton span {
+    display: none;
+  }
+
+  .backButton {
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    justify-content: center;
+  }
+
+  .fullscreenButton {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .viewerHeader {
+    padding: 16px 20px;
+  }
+
+  .carnivalTitle {
+    font-size: 1.4rem;
+  }
+
+  .carnivalIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .imageCounter {
+    font-size: 1rem;
+  }
+
+  .imageContainer {
+    padding: 15px 5px; /* Minimal padding for maximum image space */
+    min-height: 70vh; /* Even larger for small phones */
+  }
+
+  .imageWrapper {
+    max-height: 90vh; /* Almost full screen height */
+    max-width: 99vw; /* Almost full screen width */
+    border-radius: 8px; /* Smaller border radius for phones */
+  }
+
+  .mainImage {
+    border-radius: 6px; /* Even smaller border radius for phones */
+  }
+
+  .navButton {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    opacity: 0.9; /* Slightly more visible on small screens */
+  }
+
+  .prevButton {
+    left: 3px; /* Almost at the edge */
+  }
+
+  .nextButton {
+    right: 3px; /* Almost at the edge */
+  }
+
+  .thumbnail {
+    width: 70px;
+    height: 70px;
+  }
+
+  .thumbnailContainer {
+    gap: 16px;
+    padding: 0 10px;
+  }
+
+  .shortcutsInfo {
+    font-size: 0.7rem;
+    padding: 8px 16px;
+    bottom: 15px;
+  }
+}
+
+/* Enhanced Custom Scrollbar */
+.thumbnailStrip::-webkit-scrollbar {
+  height: 8px;
+}
+
+.thumbnailStrip::-webkit-scrollbar-track {
+  background: rgba(3, 98, 76, 0.2);
+  border-radius: 4px;
+}
+
+.thumbnailStrip::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--color-accent-bright), var(--color-accent-dark));
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(46, 192, 149, 0.3);
+}
+
+.thumbnailStrip::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, var(--color-accent-dark), var(--color-accent-bright));
+  box-shadow: 0 4px 12px rgba(46, 192, 149, 0.5);
+}
+
+/* Smooth loading transitions */
+.imageWrapper {
+  animation: containerFadeIn 0.6s ease-out;
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
