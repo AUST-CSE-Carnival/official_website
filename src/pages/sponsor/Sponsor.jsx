@@ -145,37 +145,35 @@ function TitleSponsorSection() {
   );
 }
 
-function HackathonPartnership() {
+function PartnershipRow() {
   return (
-    <section className={styles.segmentPartnership}>
-      <h2 className={styles.sectionTitle}>Hackathon Partner</h2>
-      <img src={partner4} alt="Hackathon Partner" className={styles.CyberBanglaLogo} />
-      <p className={styles.ctaDescription}>
-        Our hackathon partner brings innovative technology solutions and mentorship to empower developers and creators. Together, we foster a collaborative environment where brilliant ideas transform into groundbreaking solutions through intensive coding marathons and creative problem-solving sessions.
-      </p>
-      <Link to="https://hackathon-partner.com" className={styles.ctaButton}>
-        Learn More
-      </Link>
+    <section className={styles.partnershipRow}>
+      <div className={styles.partnershipContainer}>
+        <div className={styles.partnershipItem}>
+          <h2 className={styles.sectionTitle}>Hackathon Partner</h2>
+          <img src={partner4} alt="Hackathon Partner" className={styles.CyberBanglaLogo} />
+          <p className={styles.ctaDescription}>
+              Programming Hero is working to build the learning-to-career journey of Bangladeshi youth in the tech sector. In the last 4 years, 5,000+ students have secured jobs or internships as web developers through Programming Hero’s Web Development Bootcamp.
+          </p>
+          <Link to="https://www.facebook.com/programmingHero" className={styles.ctaButton}>
+            Learn More
+          </Link>
+        </div>
+
+        <div className={styles.partnershipItem}>
+          <h2 className={styles.sectionTitle}>Outfit Partner</h2>
+          <img src={partner7} alt="Outfit Partner" className={styles.CyberBanglaLogo} />
+          <p className={styles.ctaDescription}>
+              UKWAY Global Education Consultants is an international student consulting firm for education, based in the UK. We work with students from different educational and cultural backgrounds. We operate in the UK, USA, Australia, Canada, Europe, and the Middle East.
+          </p>
+          <Link to="https://www.facebook.com/ukwayglobalec.bd" className={styles.ctaButton}>
+              Learn More
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }
-
-function OutfitPartnership() {
-  return (
-    <section className={styles.segmentPartnership}>
-      <h2 className={styles.sectionTitle}>Outfit Partner</h2>
-      <img src={partner7} alt="Outfit Partner" className={styles.CyberBanglaLogo} />
-      <p className={styles.ctaDescription}>
-        Our outfit partner provides premium branded merchandise and apparel for our events. From custom t-shirts to professional accessories, they ensure our participants and organizers look their best while representing the spirit of innovation and excellence that defines our carnival.
-      </p>
-      <Link to="https://outfit-partner.com" className={styles.ctaButton}>
-        View Collection
-      </Link>
-    </section>
-  );
-}
-
-
 
 function ContactCTA() {
   return (
@@ -201,8 +199,7 @@ export default function Sponsor() {
         <TitleSponsorSection />
           <ItGraphicsPartnership />
         <SegmentPartnership />
-        <HackathonPartnership />
-        <OutfitPartnership />
+        <PartnershipRow />
       </main>
       <Footer />
     </div>
