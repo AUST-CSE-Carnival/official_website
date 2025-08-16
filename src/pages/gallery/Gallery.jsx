@@ -3,89 +3,9 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Icon from '../../components/common/Icon';
 import styles from './Gallery.module.css';
+import { carnivalData, magazineData } from '../../data/galleryData';
 
-// Import carnival images with proper paths for production
-const importCarnivalImages = (carnivalVersion, count) => {
-  const images = [];
-  for (let i = 1; i <= count; i++) {
-    images.push({
-      src: `/images/carnivals/Carnival ${carnivalVersion}.0/carnival_${carnivalVersion}_img_${i}.jpg`,
-      alt: `AUST CSE Carnival ${carnivalVersion}.0 - Memory ${i}`,
-      id: `carnival_${carnivalVersion}_${i}`,
-      thumbnail: `/images/carnivals/Carnival ${carnivalVersion}.0/carnival_${carnivalVersion}_img_${i}.jpg`
-    });
-  }
-  return images;
-};
-
-// Enhanced carnival data with comprehensive information.
-const carnivalData = {
-  "1.0": {
-    title: "Integer 43",
-    subtitle: "The Pioneer Journey Begins",
-    description: "The very first AUST CSE Carnival that started our amazing tradition of innovation and technology celebration.",
-    year: "2021",
-    gradient: "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-accent-dark) 100%)",
-    accentColor: "#403168",
-    icon: "rocket",
-    position: "left",
-    images: importCarnivalImages("1", 18),
-    stats: { photos: 18, events: 5, participants: "500+", duration: "3 days" },
-    highlights: ["First Ever Carnival", "Programming Contest", "Tech Exhibition"]
-  },
-  "2.0": {
-    title: "Decipher 44",
-    subtitle: "Continuing the Legacy",
-    description: "Building upon our foundation with expanded events and greater participation from the tech community.",
-    year: "2022",
-    gradient: "linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent-bright) 100%)",
-    accentColor: "#8e3795",
-    icon: "target",
-    position: "right",
-    images: importCarnivalImages("2", 6),
-    stats: { photos: 6, events: 6, participants: "750+", duration: "3 days" },
-    highlights: ["UI/UX Competition", "Hackathon", "AI Workshop"]
-  },
-  "3.0": {
-    title: "Qubits 45",
-    subtitle: "Setting New Benchmarks",
-    description: "A quantum leap in carnival excellence with cutting-edge competitions and industry partnerships.",
-    year: "2023",
-    gradient: "linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary-dark) 100%)",
-    accentColor: "#325666",
-    icon: "star",
-    position: "left",
-    images: importCarnivalImages("3", 8),
-    stats: { photos: 8, events: 7, participants: "1000+", duration: "4 days" },
-    highlights: ["Quantum Computing", "Robotics Showcase", "Startup Pitch"]
-  },
-  "4.0": {
-    title: "Carnival 4.0",
-    subtitle: "Innovation at Its Peak",
-    description: "The fourth iteration brought revolutionary changes with international participation and advanced tech demos.",
-    year: "2024",
-    gradient: "linear-gradient(135deg, var(--color-accent-bright) 0%, var(--color-accent-dark) 100%)",
-    accentColor: "#0b0146",
-    icon: "tent",
-    position: "right",
-    images: importCarnivalImages("4", 10),
-    stats: { photos: 10, events: 8, participants: "1200+", duration: "4 days" },
-    highlights: ["International Speakers", "VR/AR Demos", "Blockchain Workshop"]
-  },
-  "5.0": {
-    title: "Carnival 5.0",
-    subtitle: "The Future is Here",
-    description: "Our most ambitious carnival yet, showcasing the latest in AI, machine learning, and emerging technologies.",
-    year: "2025",
-    gradient: "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-accent-bright) 100%)",
-    accentColor: "#420605",
-    icon: "sparkles",
-    position: "left",
-    images: importCarnivalImages("5", 12),
-    stats: { photos: 12, events: 10, participants: "1500+", duration: "5 days" },
-    highlights: ["AI Revolution", "Metaverse Expo", "Global Tech Summit"]
-  }
-};
+// Remove the local carnival data and image import function as they're now in the data file
 
 const Gallery = () => {
   const [activeGallery, setActiveGallery] = useState(null);
@@ -605,24 +525,20 @@ const Gallery = () => {
             </div>
 
             <div className={styles.magazineGrid}>
-              {[
-                { id: 1, title: "Digital Innovation Handbook", year: "2025", color: "#2ec095" },
-                { id: 2, title: "Tech Excellence Magazine", year: "2024", color: "#03624c" },
-                { id: 3, title: "Future Leaders Journal", year: "2023", color: "#042222" }
-              ].map((mag) => (
-                <div key={mag.id} className={styles.magazineCard} style={{ '--accent-color': mag.color }}>
+              {magazineData.map((mag) => (
+                <a key={mag.id} href={mag.link} className={styles.magazineCard} style={{ '--accent-color': mag.color }} target="_blank" rel="noopener noreferrer">
                   <div className={styles.magazineCover}>
                     <div className={styles.magazineGlow}></div>
                     <div className={styles.magazineContent}>
                       <div className={styles.magazineYear}>{mag.year}</div>
                       <h3>{mag.title}</h3>
-                      <p>CSE Carnival Edition {mag.id}</p>
+                      <p>{mag.description}</p>
                       <div className={styles.magazineButton}>
                         <span>Read More</span>
                       </div>
                     </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
