@@ -240,7 +240,7 @@ const Gallery = () => {
                   <span className={styles.heroStatLabel}>Total segments</span>
                 </div>
                 <div className={styles.heroStat}>
-                  <span className={styles.heroStatNumber}>5000+</span>
+                  <span className={styles.heroStatNumber}>2500+</span>
                   <span className={styles.heroStatLabel}>Total participations</span>
                 </div>
               </div>
