@@ -17,8 +17,8 @@ export const carnivalSegments = {
         fee: 'Free',
         teamSize: 'Individual'
       },
-      registrationLink: 'https://forms.google.com/ctf-bootcamp-01',
-      rulebookLink: 'https://drive.google.com/ctf-bootcamp-rules'
+      registrationLink: '#',
+      rulebookLink: 'https://drive.google.com/drive/folders/1GPOdeaWamMBgwcVkIUFT_N-8kPfobYkV'
     },
     {
       id: 'workshop-capture-the-flag-02',
@@ -34,8 +34,8 @@ export const carnivalSegments = {
         fee: 'Free',
         teamSize: 'Individual'
       },
-      registrationLink: 'https://forms.google.com/ctf-bootcamp-02',
-      rulebookLink: 'https://drive.google.com/ctf-bootcamp-rules'
+      registrationLink: '#',
+      rulebookLink: 'https://drive.google.com/drive/folders/1GPOdeaWamMBgwcVkIUFT_N-8kPfobYkV'
     },
     {
       id: 'workshop-capture-the-flag-03',
@@ -51,8 +51,8 @@ export const carnivalSegments = {
         fee: 'Free',
         teamSize: 'Individual'
       },
-      registrationLink: 'https://forms.google.com/ctf-bootcamp-03',
-      rulebookLink: 'https://drive.google.com/ctf-bootcamp-rules'
+      registrationLink: '#',
+      rulebookLink: 'https://drive.google.com/drive/folders/1GPOdeaWamMBgwcVkIUFT_N-8kPfobYkV'
     },
     {
       id: 'workshop-hackathon',
@@ -68,28 +68,45 @@ export const carnivalSegments = {
         fee: 'Free',
         teamSize: 'Individual'
       },
-      registrationLink: 'https://forms.google.com/hackathon-workshop',
-      rulebookLink: 'https://drive.google.com/hackathon-workshop-rules'
+      registrationLink: '#',
+      rulebookLink: 'https://drive.google.com/drive/folders/1AXl-Ob2ebFkP-mgKblqLQWTB8k_5ksu5'
     }
   ],
 
   prelims: [
     {
+      id: 'prelim-quiz-competition',
+      title: 'Quiz Competition',
+      type: 'Onsite',
+      date: 'August 26, 2025',
+      time: 'TBA',
+      description: 'General knowledge and technical quiz competition.',
+      category: 'Academic',
+      image: '/images/segments/26 Quiz Competition.jpg',
+      registration: {
+        deadline: 'August 20, 2025',
+        fee: '150 BDT',
+        teamSize: '3 members'
+      },
+      registrationLink: 'https://forms.gle/2noA5MBYAbVpfEi46',
+      rulebookLink: 'https://drive.google.com/drive/folders/1RH3a4Fm_a67fUqMH5jyHAkKZCKi0eO4w'
+    },
+    {
       id: 'prelim-programming-contest',
       title: 'Programming Contest',
       type: 'Online',
-      date: 'August 20, 2025',
+      date: 'August 22, 2025',
       time: 'TBA',
       description: 'Solve algorithmic challenges in this online preliminary contest.',
       category: 'Programming',
       image: '/images/segments/28 Programming Contest.jpg',
       registration: {
-        deadline: 'August 22, 2025',
+        deadline: 'August 20, 2025',
         fee: 'Free',
         teamSize: 'Individual'
       },
       registrationLink: 'https://forms.gle/6GjgUaScPvEw2h5b7',
-      rulebookLink: 'https://drive.google.com/drive/folders/15Ip7_nHcd6LdrWgixiBkJWrZYDCf3ScH?usp=drive_link'
+      rulebookLink: 'https://drive.google.com/drive/folders/15Ip7_nHcd6LdrWgixiBkJWrZYDCf3ScH'
     }
   ],
 
@@ -143,13 +160,13 @@ export const carnivalSegments = {
         teamSize: '2-3 members'
       },
       registrationLink: 'https://forms.gle/UYX89cssKMXbijLx5',
-      rulebookLink: 'https://drive.google.com/ctf-competition-rules'
+      rulebookLink: 'https://drive.google.com/drive/folders/1GPOdeaWamMBgwcVkIUFT_N-8kPfobYkV'
     },
     {
       id: 'quiz-competition',
       title: 'Quiz Competition',
       type: 'Onsite',
-      date: 'August 26, 2025',
+      date: 'August 27, 2025',
       time: 'TBA',
       description: 'General knowledge and technical quiz competition.',
       category: 'Academic',
@@ -242,7 +259,7 @@ export const carnivalSegments = {
           description: 'Competitive football simulation game'
         }
       ],
-      rulebookLink: 'https://drive.google.com/esports-rules'
+      rulebookLink: 'https://drive.google.com/drive/folders/1Bk06-LFv5fGC3hHDxkH6jOTsoJB6rMVJ'
     },
     {
       id: 'main-programming-contest',
@@ -254,7 +271,7 @@ export const carnivalSegments = {
       category: 'Programming',
       image: '/images/segments/28 Programming Contest.jpg',
       registration: {
-        deadline: 'August 27, 2025',
+        deadline: 'August 20, 2025',
         fee: 'Free',
         teamSize: '3 members'
       },
