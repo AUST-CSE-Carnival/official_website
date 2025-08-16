@@ -872,7 +872,7 @@
 
 .magazineGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reduced from 350px */
   gap: 50px;
   max-width: 1100px;
   margin: 0 auto;
@@ -886,6 +886,9 @@
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
+  width: 100%; /* Add responsive width */
+  max-width: 100%; /* Ensure it doesn't exceed container */
+  box-sizing: border-box; /* Include padding/border in width */
   /* Remove link styling */
   text-decoration: none;
   color: inherit;
@@ -1109,6 +1112,32 @@
   .viewGalleryButton {
     padding: 14px 28px; /* Smaller button for mobile */
     font-size: 0.9rem;
+  }
+
+  /* Magazine cards mobile responsiveness */
+  .magazineGrid {
+    grid-template-columns: 1fr !important; /* Force single column on tablets */
+    gap: 30px !important; /* Reduce gap */
+    padding: 0 20px; /* Add padding to grid container */
+  }
+
+  .magazineCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+  .magazineCover {
+    height: 350px; /* Reduce height for mobile */
+    padding: 30px; /* Reduce padding */
+  }
+
+  .magazineContent h3 {
+    font-size: 1.6rem; /* Smaller title for mobile */
+  }
+
+  .magazineContent p {
+    font-size: 1rem; /* Smaller description */
   }
 }
 
