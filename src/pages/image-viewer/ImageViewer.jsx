@@ -14,7 +14,6 @@ const ImageViewer = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoadError, setImageLoadError] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showControls, setShowControls] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -24,41 +23,12 @@ const ImageViewer = () => {
   // Get current carnival data using the decoded ID
   const currentCarnival = carnivalData[decodedCarnivalId];
 
-  // Check for mobile device
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }, []);
-
-  // Auto-hide controls on mobile after 3 seconds
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const timer = setTimeout(() => {
-      setShowControls(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [currentImageIndex, isMobile]);
-
-  // Show controls when user interacts
-  const showControlsTemporarily = () => {
-    if (isMobile) {
-      setShowControls(true);
-      setTimeout(() => setShowControls(false), 3000);
-    }
-  };
 
   // Redirect if carnival doesn't exist
   useEffect(() => {
@@ -83,18 +53,24 @@ const ImageViewer = () => {
     setCurrentImageIndex(index);
     setSearchParams({ image: index.toString() });
 
-    // Preload next and previous images
+    // Preload adjacent images for better performance
     if (currentCarnival) {
+      const imagesToPreload = [];
       const nextIndex = index < currentCarnival.images.length - 1 ? index + 1 : 0;
       const prevIndex = index > 0 ? index - 1 : currentCarnival.images.length - 1;
+      imagesToPreload.push(nextIndex, prevIndex);
 
-      [nextIndex, prevIndex].forEach(preloadIndex => {
-        const img = new Image();
-        img.src = currentCarnival.images[preloadIndex].src;
+      // Preload images
+      imagesToPreload.forEach((preloadIndex, priority) => {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = currentCarnival.images[preloadIndex].src;
+          img.loading = 'eager';
+        }, priority * 50);
       });
     }
 
-    setTimeout(() => setIsLoading(false), 300);
+    setTimeout(() => setIsLoading(false), 150);
   }, [setSearchParams, currentCarnival]);
 
   // Navigation functions
@@ -146,7 +122,7 @@ const ImageViewer = () => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [navigate, nextImage, prevImage]);
 
-  // Enhanced touch/swipe functionality
+  // Touch/swipe functionality
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [touchDistance, setTouchDistance] = useState(0);
@@ -155,7 +131,6 @@ const ImageViewer = () => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
     setTouchDistance(0);
-    showControlsTemporarily();
   };
 
   const handleTouchMove = (e) => {
@@ -169,7 +144,7 @@ const ImageViewer = () => {
     if (!touchStart || !touchEnd) return;
 
     const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 75;  // Increased threshold for more deliberate swipes
+    const isLeftSwipe = distance > 75;
     const isRightSwipe = distance < -75;
 
     if (isLeftSwipe) nextImage();
@@ -178,17 +153,15 @@ const ImageViewer = () => {
     setTouchDistance(0);
   }, [touchStart, touchEnd, nextImage, prevImage]);
 
-  // Double tap to toggle fullscreen on mobile
-  const [lastTap, setLastTap] = useState(0);
-  const handleDoubleTap = () => {
-    const now = Date.now();
-    const DOUBLE_PRESS_DELAY = 300;
-    if (lastTap && (now - lastTap) < DOUBLE_PRESS_DELAY) {
-      setIsFullscreen(prev => !prev);
-    } else {
-      setLastTap(now);
-    }
-  };
+  // Check for mobile device with resize listener
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Return early if no carnival data
   if (!currentCarnival) {
@@ -199,55 +172,81 @@ const ImageViewer = () => {
   const totalImages = currentCarnival.images.length;
 
   return (
-    <div className={`${styles.imageViewerPage} ${isFullscreen ? styles.fullscreen : ''} ${isMobile ? styles.mobile : ''}`}>
+    <div className={`${styles.imageViewerPage} ${isFullscreen ? styles.fullscreen : ''}`}>
       {!isFullscreen && <Header />}
 
       <main className={styles.main}>
-        {/* Mobile-optimized Header */}
-        {(!isMobile || showControls) && (
-          <div className={`${styles.viewerHeader} ${!showControls ? styles.hidden : ''}`}>
-            <div className={styles.headerLeft}>
-              <button
-                className={styles.backButton}
-                onClick={() => navigate('/gallery')}
-                aria-label="Back to gallery"
-              >
-                <Icon type="arrow-left" size="medium" />
-                {!isMobile && <span>Back to Gallery</span>}
-              </button>
-            </div>
+        {/* Header - Mobile Optimized */}
+        <div className={`${styles.viewerHeader} ${isMobile ? styles.mobileHeader : ''}`}>
+          {isMobile ? (
+            /* Mobile Header Layout */
+            <>
+              <div className={styles.mobileTopRow}>
+                <button
+                  className={styles.backButton}
+                  onClick={() => navigate('/gallery')}
+                  aria-label="Back to gallery"
+                >
+                  <Icon type="arrow-left" size="medium" />
+                </button>
 
-            <div className={styles.headerCenter}>
-              <div className={styles.carnivalInfo}>
-                <span className={styles.carnivalIcon}>{currentCarnival.carnivalNumber}</span>
-                {!isMobile && <h1 className={styles.carnivalTitle}>{currentCarnival.title}</h1>}
-                <span className={styles.carnivalYear}>{currentCarnival.year}</span>
+                <div className={styles.mobileImageCounter}>
+                  {currentImageIndex + 1} / {totalImages}
+                </div>
               </div>
-              <div className={styles.imageCounter}>
-                {currentImageIndex + 1} / {totalImages}
+
+              <div className={styles.mobileBottomRow}>
+                <div className={styles.mobileCarnivalInfo}>
+                  <span className={styles.carnivalIcon}>{currentCarnival.carnivalNumber}</span>
+                  <span className={styles.carnivalYear}>{currentCarnival.year}</span>
+                </div>
               </div>
-            </div>
+            </>
+          ) : (
+            /* Desktop Header Layout */
+            <>
+              <div className={styles.headerLeft}>
+                <button
+                  className={styles.backButton}
+                  onClick={() => navigate('/gallery')}
+                  aria-label="Back to gallery"
+                >
+                  <Icon type="arrow-left" size="medium" />
+                  <span>Back to Gallery</span>
+                </button>
+              </div>
 
-            <div className={styles.headerRight}>
-              <button
-                className={styles.fullscreenButton}
-                onClick={() => setIsFullscreen(prev => !prev)}
-                aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-              >
-                <Icon type={isFullscreen ? "minimize" : "maximize"} size="medium" />
-              </button>
-            </div>
-          </div>
-        )}
+              <div className={styles.headerCenter}>
+                <div className={styles.carnivalInfo}>
+                  <span className={styles.carnivalIcon}>{currentCarnival.carnivalNumber}</span>
+                  <h1 className={styles.carnivalTitle}>{currentCarnival.title}</h1>
+                  <span className={styles.carnivalYear}>{currentCarnival.year}</span>
+                </div>
+                <div className={styles.imageCounter}>
+                  {currentImageIndex + 1} / {totalImages}
+                </div>
+              </div>
 
-        {/* Main Image Container with enhanced mobile support */}
+              <div className={styles.headerRight}>
+                <button
+                  className={styles.fullscreenButton}
+                  onClick={() => setIsFullscreen(prev => !prev)}
+                  aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                >
+                  <Icon type={isFullscreen ? "minimize" : "maximize"} size="medium" />
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Main Image Container */}
         <div
           className={styles.imageContainer}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          onClick={isMobile ? showControlsTemporarily : undefined}
-          onDoubleClick={isMobile ? handleDoubleTap : undefined}
+          data-image-container
         >
           {/* Loading indicator */}
           {isLoading && (
@@ -256,33 +255,22 @@ const ImageViewer = () => {
             </div>
           )}
 
-          {/* Swipe indicator */}
-          {isMobile && Math.abs(touchDistance) > 30 && (
-            <div className={`${styles.swipeIndicator} ${touchDistance > 0 ? styles.swipeLeft : styles.swipeRight}`}>
-              <Icon type={touchDistance > 0 ? "chevron-left" : "chevron-right"} size="large" />
-            </div>
-          )}
+          {/* Navigation Arrows */}
+          <button
+            className={`${styles.navButton} ${styles.prevButton}`}
+            onClick={prevImage}
+            aria-label="Previous image"
+          >
+            <Icon type="chevron-left" size="large" />
+          </button>
 
-          {/* Navigation Arrows - Hidden on mobile by default */}
-          {(!isMobile || showControls) && (
-            <>
-              <button
-                className={`${styles.navButton} ${styles.prevButton}`}
-                onClick={prevImage}
-                aria-label="Previous image"
-              >
-                <Icon type="chevron-left" size="large" />
-              </button>
-
-              <button
-                className={`${styles.navButton} ${styles.nextButton}`}
-                onClick={nextImage}
-                aria-label="Next image"
-              >
-                <Icon type="chevron-right" size="large" />
-              </button>
-            </>
-          )}
+          <button
+            className={`${styles.navButton} ${styles.nextButton}`}
+            onClick={nextImage}
+            aria-label="Next image"
+          >
+            <Icon type="chevron-right" size="large" />
+          </button>
 
           {/* Image Display */}
           <div className={styles.imageWrapper}>
@@ -306,9 +294,9 @@ const ImageViewer = () => {
           </div>
         </div>
 
-        {/* Mobile-optimized Thumbnail Strip */}
-        {(!isMobile || showControls) && !isFullscreen && (
-          <div className={`${styles.thumbnailStrip} ${!showControls ? styles.hidden : ''}`}>
+        {/* Thumbnail Strip */}
+        {!isFullscreen && (
+          <div className={styles.thumbnailStrip}>
             <div className={styles.thumbnailContainer}>
               {currentCarnival.images.map((image, index) => (
                 <button
@@ -326,7 +314,7 @@ const ImageViewer = () => {
           </div>
         )}
 
-        {/* Enhanced Progress Bar */}
+        {/* Progress Bar */}
         <div className={styles.progressBar}>
           <div
             className={styles.progressFill}
@@ -337,14 +325,7 @@ const ImageViewer = () => {
 
       {!isFullscreen && <Footer />}
 
-      {/* Mobile Instructions */}
-      {isMobile && !showControls && (
-        <div className={styles.mobileInstructions}>
-          <p>Tap to show controls • Swipe to navigate • Double tap for fullscreen</p>
-        </div>
-      )}
-
-      {/* Desktop Keyboard Shortcuts Info */}
+      {/* Keyboard Shortcuts Info - Desktop Only */}
       {!isMobile && (
         <div className={styles.shortcutsInfo}>
           <p>Use ← → arrow keys to navigate • Press F for fullscreen • ESC to go back</p>

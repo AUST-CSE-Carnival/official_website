@@ -169,8 +169,8 @@ const Gallery = () => {
                 <span className={styles.statLabel}>Photos</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statNumber}>{carnival.stats.events}</span>
-                <span className={styles.statLabel}>Events</span>
+                <span className={styles.statNumber}>{carnival.stats.segments}</span>
+                <span className={styles.statLabel}>Segments</span>
               </div>
               <div className={styles.stat}>
                 <span className={styles.statNumber}>{carnival.stats.participants}</span>

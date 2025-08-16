@@ -26,7 +26,7 @@ export const carnivalData = {
     carnivalNumber: "1.0",
     position: "left",
     images: importCarnivalImages("1", 18),
-    stats: { photos: 18, segments: 5, participants: "500+", duration: "3 days" },
+    stats: { photos: 18, segments: 5, participants: "320+", duration: "6 days" },
     highlights: ["First Ever Carnival", "Programming Contest", "Tech Exhibition"]
   },
   "2.0": {
@@ -39,7 +39,7 @@ export const carnivalData = {
     carnivalNumber: "2.0",
     position: "right",
     images: importCarnivalImages("2", 6),
-    stats: { photos: 6, segments: 6, participants: "750+", duration: "3 days" },
+    stats: { photos: 6, segments: 6, participants: "390+", duration: "7 days" },
     highlights: ["UI/UX Competition", "Hackathon", "AI Workshop"]
   },
   "3.0": {
@@ -52,7 +52,7 @@ export const carnivalData = {
     carnivalNumber: "3.0",
     position: "left",
     images: importCarnivalImages("3", 8),
-    stats: { photos: 8, segments: 7, participants: "1000+", duration: "4 days" },
+    stats: { photos: 8, segments: 8, participants: "460+", duration: "6 days" },
     highlights: ["Quantum Computing", "Robotics Showcase", "Startup Pitch"]
   },
   "4.0": {
@@ -65,7 +65,7 @@ export const carnivalData = {
     carnivalNumber: "4.0",
     position: "right",
     images: importCarnivalImages("4", 10),
-    stats: { photos: 10, segments: 8, participants: "1200+", duration: "4 days" },
+    stats: { photos: 10, segments: 8, participants: "400+", duration: "6 days" },
     highlights: ["International Speakers", "VR/AR Demos", "Blockchain Workshop"]
   },
   "5.0": {
@@ -78,7 +78,7 @@ export const carnivalData = {
     carnivalNumber: "5.0",
     position: "left",
     images: importCarnivalImages("5", 12),
-    stats: { photos: 12, segments: 10, participants: "1500+", duration: "5 days" },
+    stats: { photos: 12, segments: 7, participants: "380+", duration: "8 days" },
     highlights: ["AI Revolution", "Metaverse Expo", "Global Tech Summit"]
   }
 };
