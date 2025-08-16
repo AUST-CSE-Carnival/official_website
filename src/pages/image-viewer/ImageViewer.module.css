@@ -634,6 +634,108 @@
   50% { opacity: 1; }
 }
 
+/* Mobile-specific styles */
+.mobile {
+  touch-action: pan-x pinch-zoom;
+}
+
+.mobile .imageContainer {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Auto-hiding controls */
+.hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* Loading overlay */
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(2, 26, 26, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  backdrop-filter: blur(5px);
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(46, 192, 149, 0.3);
+  border-top: 3px solid var(--color-accent-bright);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Swipe indicators */
+.swipeIndicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(46, 192, 149, 0.9);
+  color: var(--color-primary-dark);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  animation: swipePulse 0.3s ease-out;
+}
+
+.swipeLeft {
+  left: 20px;
+}
+
+.swipeRight {
+  right: 20px;
+}
+
+@keyframes swipePulse {
+  0% {
+    transform: translateY(-50%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Swiping image effect */
+.swiping {
+  transition: none !important;
+}
+
+/* Mobile instructions */
+.mobileInstructions {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(2, 26, 26, 0.95) 0%, rgba(4, 34, 34, 0.95) 100%);
+  color: var(--color-text-gray);
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 0.8rem;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(46, 192, 149, 0.3);
+  z-index: 100;
+  animation: fadeInUp 0.5s ease-out;
+  text-align: center;
+  max-width: 90vw;
+}
+
 /* Enhanced Mobile Responsiveness */
 @media (max-width: 1024px) {
   .imageContainer {
@@ -664,81 +766,149 @@
   }
 
   .imageWrapper {
-    max-height: 75vh; /* Increased from 80vh for better mobile viewing */
+    max-height: 75vh;
   }
 }
 
 @media (max-width: 768px) {
   .viewerHeader {
-    padding: 20px 24px;
-    flex-direction: column;
-    gap: 20px;
+    padding: 16px 20px;
     background: rgba(2, 26, 26, 0.98);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .mobile .viewerHeader {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
   }
 
   .headerLeft,
   .headerCenter,
   .headerRight {
     flex: none;
-    width: 100%;
+  }
+
+  .headerLeft {
+    width: auto;
+  }
+
+  .headerCenter {
+    flex: 1;
+    margin: 0 20px;
+  }
+
+  .headerRight {
+    width: auto;
   }
 
   .carnivalInfo {
-    flex-direction: column;
+    flex-direction: row;
     gap: 12px;
+    margin-bottom: 8px;
+    justify-content: center;
   }
 
   .carnivalTitle {
-    font-size: 1.6rem;
+    display: none; /* Hidden on mobile to save space */
   }
 
   .imageCounter {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   .imageContainer {
-    padding: 20px 10px; /* Reduced horizontal padding for more image space */
-    min-height: 65vh; /* Increased minimum height for mobile */
+    padding: 0;
+    min-height: 100vh;
+    background: var(--color-primary-dark);
+  }
+
+  .mobile .imageContainer {
+    padding-top: 80px; /* Account for fixed header */
+  }
+
+  .mobile.fullscreen .imageContainer {
+    padding-top: 0;
   }
 
   .imageWrapper {
-    max-height: 85vh; /* Much larger for mobile */
-    max-width: 98vw; /* Use almost full screen width */
+    max-height: 100vh;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .mobile .imageWrapper {
+    height: calc(100vh - 80px); /* Full height minus header */
+  }
+
+  .mobile.fullscreen .imageWrapper {
+    height: 100vh;
   }
 
   .mainImage {
-    max-width: 100%;
+    max-width: 100vw;
     max-height: 100%;
-    border-radius: 12px; /* Slightly smaller border radius for mobile */
+    border-radius: 0;
+    object-fit: contain;
   }
 
   .navButton {
-    width: 60px;
-    height: 60px;
-    font-size: 1.4rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    background: rgba(46, 192, 149, 0.8);
+    opacity: 0.9;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .mobile .navButton {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mobile .navButton.visible {
+    opacity: 0.9;
+    pointer-events: auto;
   }
 
   .prevButton {
-    left: 5px; /* Move closer to edge for more image space */
+    left: 10px;
   }
 
   .nextButton {
-    right: 5px; /* Move closer to edge for more image space */
+    right: 10px;
   }
 
   .thumbnailStrip {
-    padding: 30px 20px;
+    padding: 20px 15px;
+    background: rgba(2, 26, 26, 0.98);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .mobile .thumbnailStrip {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    transform: translateY(0);
+  }
+
+  .mobile .thumbnailStrip.hidden {
+    transform: translateY(100%);
   }
 
   .thumbnail {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
   }
 
-  .shortcutsInfo {
-    font-size: 0.8rem;
-    padding: 10px 20px;
-    bottom: 20px;
+  .thumbnailContainer {
+    gap: 12px;
+    justify-content: flex-start;
+    padding: 0 10px;
   }
 
   .backButton span {
@@ -746,104 +916,107 @@
   }
 
   .backButton {
-    padding: 12px;
-    width: 48px;
-    height: 48px;
+    padding: 10px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     justify-content: center;
   }
 
   .fullscreenButton {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .carnivalIcon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .carnivalYear {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+
+  .progressBar {
+    height: 3px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+  }
+
+  .mobile .progressBar {
+    bottom: auto;
+    top: 79px; /* Just below the header */
+  }
+
+  .mobile.fullscreen .progressBar {
+    top: 0;
   }
 }
 
 @media (max-width: 480px) {
   .viewerHeader {
-    padding: 16px 20px;
-  }
-
-  .carnivalTitle {
-    font-size: 1.4rem;
+    padding: 12px 16px;
   }
 
   .carnivalIcon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
 
   .imageCounter {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
-  .imageContainer {
-    padding: 15px 5px; /* Minimal padding for maximum image space */
-    min-height: 70vh; /* Even larger for small phones */
-  }
-
-  .imageWrapper {
-    max-height: 90vh; /* Almost full screen height */
-    max-width: 99vw; /* Almost full screen width */
-    border-radius: 8px; /* Smaller border radius for phones */
-  }
-
-  .mainImage {
-    border-radius: 6px; /* Even smaller border radius for phones */
-  }
-
-  .navButton {
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
-    opacity: 0.9; /* Slightly more visible on small screens */
-  }
-
-  .prevButton {
-    left: 3px; /* Almost at the edge */
-  }
-
-  .nextButton {
-    right: 3px; /* Almost at the edge */
+  .backButton,
+  .fullscreenButton {
+    width: 40px;
+    height: 40px;
   }
 
   .thumbnail {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
   }
 
   .thumbnailContainer {
-    gap: 16px;
-    padding: 0 10px;
+    gap: 10px;
   }
 
-  .shortcutsInfo {
+  .swipeIndicator {
+    width: 50px;
+    height: 50px;
+  }
+
+  .mobileInstructions {
     font-size: 0.7rem;
-    padding: 8px 16px;
+    padding: 10px 16px;
     bottom: 15px;
   }
 }
 
-/* Enhanced Custom Scrollbar */
-.thumbnailStrip::-webkit-scrollbar {
-  height: 8px;
-}
+/* Improved touch responsiveness */
+@media (hover: none) and (pointer: coarse) {
+  .navButton:hover {
+    transform: translateY(-50%) scale(1.05);
+  }
 
-.thumbnailStrip::-webkit-scrollbar-track {
-  background: rgba(3, 98, 76, 0.2);
-  border-radius: 4px;
-}
+  .thumbnail:hover {
+    transform: scale(1.05);
+  }
 
-.thumbnailStrip::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, var(--color-accent-bright), var(--color-accent-dark));
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(46, 192, 149, 0.3);
-}
+  .backButton:hover {
+    transform: scale(1.05);
+  }
 
-.thumbnailStrip::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(90deg, var(--color-accent-dark), var(--color-accent-bright));
-  box-shadow: 0 4px 12px rgba(46, 192, 149, 0.5);
+  .fullscreenButton:hover {
+    transform: scale(1.05);
+  }
 }
 
 /* Smooth loading transitions */
