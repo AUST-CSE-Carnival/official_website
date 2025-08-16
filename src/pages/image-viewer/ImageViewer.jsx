@@ -325,10 +325,12 @@ const ImageViewer = () => {
 
       {!isFullscreen && <Footer />}
 
-      {/* Keyboard Shortcuts Info */}
-      <div className={styles.shortcutsInfo}>
-        <p>Use ← → arrow keys to navigate • Press F for fullscreen • ESC to go back</p>
-      </div>
+      {/* Keyboard Shortcuts Info - Desktop Only */}
+      {!isMobile && (
+        <div className={styles.shortcutsInfo}>
+          <p>Use ← → arrow keys to navigate • Press F for fullscreen • ESC to go back</p>
+        </div>
+      )}
     </div>
   );
 };
