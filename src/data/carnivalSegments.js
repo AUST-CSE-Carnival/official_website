@@ -103,7 +103,7 @@ export const carnivalSegments = {
       registration: {
         deadline: 'August 20, 2025',
         fee: 'Free',
-        teamSize: 'Individual'
+        teamSize: '3 members'
       },
       registrationLink: 'https://forms.gle/6GjgUaScPvEw2h5b7',
       rulebookLink: 'https://drive.google.com/drive/folders/15Ip7_nHcd6LdrWgixiBkJWrZYDCf3ScH'
