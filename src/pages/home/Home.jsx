@@ -165,7 +165,7 @@ const Home = () => {
             Join the exciting CSE Carnival!
           </h2>
           <div className={styles.ctaButtons}>
-            <Link to="/event" className={styles.btnPrimary}>Explore Events</Link>
+            <Link to="https://www.facebook.com/share/15Hr8arepgA/" className={styles.btnPrimary}>Facebook Page</Link>
             <Link to="/contact" className={styles.btnOutline}>Get Involved</Link>
           </div>
         </div>
