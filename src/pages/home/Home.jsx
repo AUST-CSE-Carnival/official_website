@@ -107,7 +107,7 @@ const Home = () => {
             </p>
             <div className={styles.heroButtons}>
               <Link to="/event" className={styles.btnPrimary}>Learn More</Link>
-              <Link to="https://www.facebook.com/austcsecarnivalofficial" className={styles.btnSecondary}>Facebook Page</Link>
+              <Link to="https://www.facebook.com/share/1B4Pjifngd/" className={styles.btnSecondary}>Register Now</Link>
             </div>
           </div>
 
