@@ -160,11 +160,11 @@ export default function Header() {
                   className={styles.mobileCta}
                 >
                   <Link
-                    to="https://youtu.be/Ra5L-uby8Hg"
+                    to="https://www.facebook.com/share/1B4Pjifngd/"
                     className={styles.mobileCtaButton}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Watch Promo Video
+                    Register Now
                   </Link>
                 </motion.div>
               </div>
