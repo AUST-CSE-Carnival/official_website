@@ -4,6 +4,7 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Icon from '../../components/common/Icon';
 import styles from './Home.module.css';
+import segmentData from '../../data/carnivalSegments.js';
 
 // Import images properly for Vite
 import titleSponsor from '../../assets/images/title_sponsor.jpg';
